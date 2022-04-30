@@ -1,3 +1,5 @@
+// Rremove all "0" and "-" from number
+
 function removeZeroAndDash(num) {
     const str = num.toString();
     let finalStr = '';
@@ -11,3 +13,4 @@ function removeZeroAndDash(num) {
 }
 
 removeZeroAndDash(-909010090);
+
