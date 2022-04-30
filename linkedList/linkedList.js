@@ -24,7 +24,7 @@ function showEachValueFromLinkedList(list) {
         }
 }
 
-// #2 #1 Solving through the recursion.
+// #2 Solving through the recursion.
 showEachValueFromLinkedList(singleLinkedList);
 
 function showEachValueRecursion(list) {
