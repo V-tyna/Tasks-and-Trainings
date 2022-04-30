@@ -47,7 +47,11 @@ const merge = (left, right) => {
     // check if left array and right array aren't empty
     while(left.length && right.length) {
         // compare two [0] indexes of left and right arrays, 
+<<<<<<< HEAD
         // the lower value shift from the initial arrray and push to the result array
+=======
+        // the lower value shift from initial arrray and push to the result array
+>>>>>>> 314d9733a1ebdaaea6e2569d5ac4bb6da0009fac
         if(left[0] <= right[0]) {
             result.push(left.shift());
         } else {
