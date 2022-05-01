@@ -37,3 +37,25 @@ const uniqueDigitsLoops = (arr) => {
 }
 
 console.log('Second way: ', uniqueDigitsLoops(ununiqueArr));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Alternative implementation of Array.flat()
+//---------------------------------------------------------------------------------------------------------------------------
+
+const arrForFlat = [3, [2, 97, [11, 15, [7]]], 5, [23, 12, [82, 36, 13, [11, 71, [1, [58, [35, 1]]]]]]];
+
+const alternativeFlat = (arr) => {
+    const tempArr = [...arr]; // use stack
+    const result = [];
+    while(tempArr.length) { // while stack has elements iterrate
+      const lastElem = tempArr.pop(); // cut last element
+      if(Array.isArray(lastElem)) { // if last element is type Array
+          tempArr.push(...lastElem); // spread last element to the stack
+      } else {
+          result.push(lastElem); // if last element isn't type Array, push last element to the final result
+      }
+    }
+    return result.reverse(); // reverse elements in result array to restore order as in input array
+}
+
+console.log('Implementation flat method: ', alternativeFlat(arrForFlat));
