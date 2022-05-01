@@ -72,6 +72,7 @@ console.log('Merge Sort: ', mergeSort(arrForMergeSort));
 // ---------------------------------------
 
 const arrForBubbleSort = [6, 2, 51, 63, 12, 4, 8, 35, 28, 1, 7];
+
 const bubbleSort = (arr) => {
     // 1st itteration
     for(let i = 0; i < arr.length; i++) {
@@ -89,3 +90,27 @@ const bubbleSort = (arr) => {
 }
 
 console.log('Bubble sort: ', bubbleSort(arrForBubbleSort));
+
+// ---------------------------------------
+//              Insertion Sort
+// ---------------------------------------
+
+const arrForInsertionSort = [81, 13, 4, 12, 69, 95, 51, 43, 7, 5, 10, 75];
+
+const insertionSort = (arr) => {
+    const result = [];
+    for(let i = 0; i < arr.length; i++){
+        result.push(arr[i]);
+        let index = i;
+        let temp;
+        while(index > 0 && result[index] < result[index - 1]) {
+            temp = result[index - 1];
+            result[index - 1] = result[index];
+            result[index] = temp;
+            index--;
+        }
+    }
+    return result;
+}
+
+console.log('Insertion sorrt: ', insertionSort(arrForInsertionSort));
