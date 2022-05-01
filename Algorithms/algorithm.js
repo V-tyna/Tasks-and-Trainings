@@ -78,10 +78,10 @@ const bubbleSort = (arr) => {
         //2nd itteration to compare 2 values 
         for(let j = 0; j < arr.length; j++){
             let temp;
-            if(arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+            if(arr[j] > arr[j + 1]) {
+                temp = arr[j]; // add 1st value to temporary variable
+                arr[j] = arr[j + 1]; // change 1st value to the 2nd
+                arr[j + 1] = temp; // to 2nd value assign 1st that lies in temp variable
             }
         }
     }
