@@ -52,7 +52,7 @@ const alternativeFlat = (arr) => {
       if(Array.isArray(lastElem)) { // if last element is type Array
           tempArr.push(...lastElem); // spread last element to the stack
       } else {
-          result.push(lastElem); // if last element isn't type Array(mean all arrays inside spreaded), push last element to the final result
+          result.push(lastElem); // if last element isn't type Array, push last element to the final result
       }
     }
     return result.reverse(); // reverse elements in result array to restore order as in input array
