@@ -20,7 +20,7 @@ function binarySearch(arr, seachingDigit) {
     return (arr[middle] !== seachingDigit ? "No such digit" : middle);
 }
 
-console.log("Target index is - ", binarySearch(arrForBinarySearch, 23));
+console.log('Binary Search. Target index is - ', binarySearch(arrForBinarySearch, 23));
 
 // ---------------------------------------
 //              Merge Sort
@@ -65,4 +65,27 @@ const merge = (left, right) => {
     return result;
 }
 
-console.log(mergeSort(arrForMergeSort));
+console.log('Merge Sort: ', mergeSort(arrForMergeSort));
+
+// ---------------------------------------
+//              Bubble Sort
+// ---------------------------------------
+
+const arrForBubbleSort = [6, 2, 51, 63, 12, 4, 8, 35, 28, 1, 7];
+const bubbleSort = (arr) => {
+    // 1st itteration
+    for(let i = 0; i < arr.length; i++) {
+        //2nd itteration to compare 2 values 
+        for(let j = 0; j < arr.length; j++){
+            let temp;
+            if(arr[j] > arr[j+1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+console.log('Bubble sort: ', bubbleSort(arrForBubbleSort));
