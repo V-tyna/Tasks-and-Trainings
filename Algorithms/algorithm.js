@@ -99,18 +99,39 @@ const arrForInsertionSort = [81, 13, 4, 12, 69, 95, 51, 43, 7, 5, 10, 75];
 
 const insertionSort = (arr) => {
     const result = [];
-    for(let i = 0; i < arr.length; i++){
-        result.push(arr[i]);
-        let index = i;
-        let temp;
-        while(index > 0 && result[index] < result[index - 1]) {
+    for(let i = 0; i < arr.length; i++) { 
+        result.push(arr[i]); // push each element to the result array
+        let index = i; // write index to index variable on each iteration
+        let temp; // temporary variable for storage value
+        while(index > 0 && result[index] < result[index - 1]) { // keep iterate while index more than 0 and current element less than previous
             temp = result[index - 1];
             result[index - 1] = result[index];
             result[index] = temp;
-            index--;
+            index--; // reduce index
         }
     }
     return result;
 }
 
-console.log('Insertion sorrt: ', insertionSort(arrForInsertionSort));
+console.log('Insertion sort: ', insertionSort(arrForInsertionSort));
+
+// ---------------------------------------
+//              Quick Sort
+// ---------------------------------------
+
+const arrForQuickSort = [ 7, 4, 1, 8, 9, 18, 0, 13, 5, 6, 10];
+
+const quickSort = (arr) => {
+    if(arr.length < 2) { // if arr.length 1 or 0 - arr is already sorted
+        return arr; 
+    }
+
+    const middle = Math.floor(arr.length / 2); // find cental index
+
+    const minLeft = arr.filter(elem => elem < arr[middle]); // filter smallest values from middle to left
+    const maxRight = arr.filter(elem => elem > arr[middle]); // filter largest values from middle to right
+
+    return [...quickSort(minLeft), arr[middle], ...quickSort(maxRight)]; // recursion to sort each value and merge final result
+}
+
+console.log('Quick Sort: ', quickSort(arrForQuickSort));
