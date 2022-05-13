@@ -14,10 +14,10 @@ function removeZeroAndDash(num) {
     return +finalStr;
 }
 
-removeZeroAndDash(-909010090);
+removeZeroAndDash('Remove all "0" and "-" from number: ', -909010090);
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                      Unique value
+//                                      Unique values
 //---------------------------------------------------------------------------------------------------------------------------
 
 // #1 way Unique digits
@@ -28,7 +28,7 @@ const uniqueDigits = (arr) => {
     return Array.from(new Set(arr));
 }
 
-console.log('First way: ', uniqueDigits(ununiqueArr));
+console.log('Unique values. First way: ', uniqueDigits(ununiqueArr));
 
 // #2 way Unique digits
 
@@ -42,7 +42,7 @@ const uniqueDigitsLoops = (arr) => {
     return finalArr;
 }
 
-console.log('Second way: ', uniqueDigitsLoops(ununiqueArr));
+console.log('Unique values. Second way: ', uniqueDigitsLoops(ununiqueArr));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Alternative implementation of Array.flat()
@@ -65,3 +65,33 @@ const alternativeFlat = (arr) => {
 }
 
 console.log('Implementation flat method: ', alternativeFlat(arrForFlat));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      HOMEWORK 13.05.2022
+//---------------------------------------------------------------------------------------------------------------------------
+// 1.1 Remove duplicates from arrays SET:
+
+const dublicateArr1 = [3, 8, 9, 10, 5, 2];
+const dublicateArr2 = [7, 8, 19, 11, 5, 6];
+
+function createArrayWithoutDuplicatesSet(arr1, arr2) {
+    return Array.from(new Set([...arr1, ...arr2]));
+}
+
+console.log('Remove dublicates, way SET: ', createArrayWithoutDuplicatesSet(dublicateArr1, dublicateArr2));
+
+// 1.2 Remove duplicates from arrays LOOP:
+
+const createArrayWithoutDuplicatesLoop = (arr1, arr2) => {
+    const finalArr = [];
+    const mergedArrs = [...arr1, ...arr2]
+    for(let i = 0; i < mergedArrs.length; i++) {
+        if(!finalArr.includes(mergedArrs[i])) {
+            finalArr.push(mergedArrs[i]);
+        }
+    }
+    return finalArr;
+}
+
+console.log('Remove dublicates, way LOOP: ', createArrayWithoutDuplicatesLoop(dublicateArr1, dublicateArr2));
+
