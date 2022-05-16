@@ -9,7 +9,7 @@ class Stack {
     }
 
     getElemByIndex(i) {
-        return this.initialObj[i.toString()];
+        return this.initialObj[i];
     }
 
     pushToStack(value) {
