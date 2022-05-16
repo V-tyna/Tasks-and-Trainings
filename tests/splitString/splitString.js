@@ -6,6 +6,4 @@ const splitString = (str) => {
   return str.split('');
 }
 
-console.log(splitString('ABC'));
-
 module.exports = splitString;
