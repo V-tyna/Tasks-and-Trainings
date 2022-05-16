@@ -8,12 +8,12 @@ describe('Decorator spy', () => {
         wrapper = decSpy(sum);
     });
 
-    test('Should write all calls to its method "calls"', () => {
+    test('Should write first call with arguments (1, 2) to its method "calls"', () => {
         wrapper(1, 2);
         expect(wrapper.calls).toEqual([[1, 2]]);
     });
 
-    test('Should save result in decorator\'s method "calls"', () => {
+    test('Should save ALL the results to decorator method "calls"', () => {
         wrapper(5, 7);
         expect(wrapper.calls).toEqual([[1, 2], [5, 7]]);
     });
