@@ -23,20 +23,4 @@ class Stack {
     }
 }
 
-const stack = new Stack();
-
-console.log('Lenght of empty stack: ', stack.stackLength);
-
-stack.pushToStack('First elem');
-stack.pushToStack('Second elem');
-stack.pushToStack('Third elem');
-console.log('After pushes: ', stack);
-
-console.log('Get elem by index: ', stack.getElemByIndex(1));
-
-stack.popFromStack();
-console.log('After Pop: ', stack);
-
-console.log('Stack length is: ', stack.stackLength);
-
 module.exports = Stack;
