@@ -37,4 +37,7 @@ describe.only('Validate Range function', () => {
         expect(validateRange(0)).toBe(true);
     });
 
+    test('should get ONLY number as value', () => {
+        expect(validateRange("Some string")).toBe("Invalid argument");
+    });
 })

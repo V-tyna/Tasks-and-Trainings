@@ -1,12 +1,9 @@
 const validateRange = (value) => {
-    const neededZeroForBusinessReasons = 0;
 
-    if(value === neededZeroForBusinessReasons || value) {
-        return value < 50 || value > 100; 
+    if(value === undefined || typeof value !== 'number') {
+        return 'Invalid argument'; 
     }
-    if(!value) {
-        return 'Invalid argument';
-    }
+    return value < 50 || value > 100;
 }
 
 module.exports = validateRange;
