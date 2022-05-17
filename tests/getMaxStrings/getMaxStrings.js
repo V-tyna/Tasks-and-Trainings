@@ -22,10 +22,6 @@ const getMaxStrings = (arr) => {
     return arr.filter(elem => elem.length === tempLength);
 }
 
-const arr111 = ["aba", "aa", "ad", "vcd", "aba"];
-
-console.log(getMaxStrings(arr111));
-
 module.exports = getMaxStrings;
 
 
