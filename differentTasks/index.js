@@ -136,7 +136,7 @@ const inputJob = [{name: 'John', job: 'chef'}, {name: 'Sean', job: 'police offic
 // }
 
 const findProgrammer = (input) => {
-    return input.length > 0 ? [(input.find(p => p.job === 'programmer').name)] : input;
+    return input.length ? [(input.find(p => p.job === 'programmer').name)] : input;
 }
 
 console.log('Find person with job "programmer": ', findProgrammer(inputJob));
@@ -159,7 +159,7 @@ const empty = [];
 
 const findYoungestAndCountTotalSalary = (people) => {
     const totalSalary = people.reduce((acc, s) => acc += s.salary , 0);
-    const youngest = people.map(p => p.age).sort()[0] || Infinity;
+    const youngest = people.sort((a, b) => a.age - b.age)[0]?.age || Infinity;
     return `youngestAge: ${youngest}, totalSalary: ${totalSalary}`;
 }
 
