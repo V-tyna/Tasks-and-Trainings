@@ -124,8 +124,8 @@ console.log('Find Person: ', foundPerson(findPersonArr));
 
 //  ----------------------- Refactoring 2: -------------------------
 const inputJob = [{name: 'John', job: 'chef'}, {name: 'Sean', job: 'police officer'}, {name: 'Kate', job: 'programmer'}, {name: 'Dean', job: 'accountant'}];
-const names = [];
 
+//const names = [];
 // const findProgrammer = (input) => {
 //     for(const i of input) {
 //         if(i.job === 'programmer') {
@@ -136,10 +136,11 @@ const names = [];
 // }
 
 const findProgrammer = (input) => {
-    return [(input.find(p => p.job === 'programmer').name)];
+    return input.length > 0 ? [(input.find(p => p.job === 'programmer').name)] : input;
 }
 
 console.log('Find person with job "programmer": ', findProgrammer(inputJob));
+console.log('Find person in Empty Array: ', findProgrammer([]));
 
 //  ----------------------- Refactoring 3: -------------------------
 const arrayYoungestSalary = [{age: 25, salary: 4000}, {age: 40, salary: 5000}, {age: 35, salary: 2000}, {age: 18, salary: 3000}];
