@@ -3,14 +3,14 @@
 //---------------------------------------------------------------------------------------------------------------------------
 
 function removeZeroAndDash(num) {
-    const str = num.toString();
-    let finalStr = '';
-    for(let letter of str) {
-        if(letter !== '-' && letter != 0) {
-            finalStr += letter;
-        }
-    }
-    return +finalStr;
+	const str = num.toString();
+	let finalStr = '';
+	for (let letter of str) {
+		if (letter !== '-' && letter != 0) {
+			finalStr += letter;
+		}
+	}
+	return +finalStr;
 }
 
 removeZeroAndDash('Remove all "0" and "-" from number: ', -909010090);
@@ -24,22 +24,22 @@ removeZeroAndDash('Remove all "0" and "-" from number: ', -909010090);
 const notUniqueArr = [1, 2, 5, 1, 7, 3, 2, 9];
 
 const uniqueDigits = (arr) => {
-    return Array.from(new Set(arr));
-}
+	return Array.from(new Set(arr));
+};
 
 console.log('Unique values. First way: ', uniqueDigits(notUniqueArr));
 
 // #2 way Unique digits
 
 const uniqueDigitsLoops = (arr) => {
-    const finalArr = [];
-    for(let i = 0 ; i < arr.length; i++) {
-        if(!finalArr.includes(arr[i])) {
-            finalArr.push(arr[i]);
-        } 
-    }
-    return finalArr;
-}
+	const finalArr = [];
+	for (let i = 0; i < arr.length; i++) {
+		if (!finalArr.includes(arr[i])) {
+			finalArr.push(arr[i]);
+		}
+	}
+	return finalArr;
+};
 
 console.log('Unique values. Second way: ', uniqueDigitsLoops(notUniqueArr));
 
@@ -47,21 +47,28 @@ console.log('Unique values. Second way: ', uniqueDigitsLoops(notUniqueArr));
 //                                      Alternative implementation of Array.flat()
 //---------------------------------------------------------------------------------------------------------------------------
 
-const arrForFlat = [3, [2, 97, [11, 15, [7]]], 5, [23, 12, [82, 36, 13, [11, 71, [1, [58, [35, 1]]]]]]];
+const arrForFlat = [
+	3,
+	[2, 97, [11, 15, [7]]],
+	5,
+	[23, 12, [82, 36, 13, [11, 71, [1, [58, [35, 1]]]]]],
+];
 
 const alternativeFlat = (arr) => {
-    const tempArr = [...arr]; // use stack
-    const result = [];
-    while(tempArr.length) { // while stack has elements iterate
-      const lastElem = tempArr.pop(); // cut last element
-      if(Array.isArray(lastElem)) { // if last element is type Array
-          tempArr.push(...lastElem); // spread last element to the stack
-      } else {
-          result.push(lastElem); // if last element isn't type Array, push last element to the final result
-      }
-    }
-    return result.reverse(); // reverse elements in result array to restore order as in input array
-}
+	const tempArr = [...arr]; // use stack
+	const result = [];
+	while (tempArr.length) {
+		// while stack has elements iterate
+		const lastElem = tempArr.pop(); // cut last element
+		if (Array.isArray(lastElem)) {
+			// if last element is type Array
+			tempArr.push(...lastElem); // spread last element to the stack
+		} else {
+			result.push(lastElem); // if last element isn't type Array, push last element to the final result
+		}
+	}
+	return result.reverse(); // reverse elements in result array to restore order as in input array
+};
 
 console.log('Implementation flat method: ', alternativeFlat(arrForFlat));
 
@@ -74,29 +81,34 @@ const duplicateArr1 = [3, 8, 9, 10, 5, 2];
 const duplicateArr2 = [7, 8, 19, 11, 5, 6];
 
 function createArrayWithoutDuplicatesSet(arr1, arr2) {
-    return Array.from(new Set([...arr1, ...arr2]));
+	return Array.from(new Set([...arr1, ...arr2]));
 }
 
-console.log('Remove duplicates, way SET: ', createArrayWithoutDuplicatesSet(duplicateArr1, duplicateArr2));
+console.log(
+	'Remove duplicates, way SET: ',
+	createArrayWithoutDuplicatesSet(duplicateArr1, duplicateArr2)
+);
 
 // 1.2 Remove duplicates from arrays LOOP:
 
 const createArrayWithoutDuplicatesLoop = (arr1, arr2) => {
-    const finalArr = [];
-    const mergedArrays = [...arr1, ...arr2]
-    for(let i = 0; i < mergedArrays.length; i++) {
-        if(!finalArr.includes(mergedArrays[i])) {
-            finalArr.push(mergedArrays[i]);
-        }
-    }
-    return finalArr;
-}
+	const finalArr = [];
+	const mergedArrays = [...arr1, ...arr2];
+	for (let i = 0; i < mergedArrays.length; i++) {
+		if (!finalArr.includes(mergedArrays[i])) {
+			finalArr.push(mergedArrays[i]);
+		}
+	}
+	return finalArr;
+};
 
-console.log('Remove duplicates, way LOOP: ', createArrayWithoutDuplicatesLoop(duplicateArr1, duplicateArr2));
-
+console.log(
+	'Remove duplicates, way LOOP: ',
+	createArrayWithoutDuplicatesLoop(duplicateArr1, duplicateArr2)
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                      HOMEWORK 07.06.2022, TASKS: Refactoring 
+//                                      HOMEWORK 07.06.2022, TASKS: Refactoring
 //---------------------------------------------------------------------------------------------------------------------------
 
 //  ----------------------- Refactoring 1: -------------------------
@@ -117,13 +129,20 @@ const findPersonArr = ['Kate', 'Sean', 'John', 'Dean'];
 // }
 
 function foundPerson(people) {
-    return people.find(p => p === 'Don' || p === 'John' || p === 'Kent') || '';
+	return (
+		people.find((p) => p === 'Don' || p === 'John' || p === 'Kent') || ''
+	);
 }
 
-console.log('Find Person: ', foundPerson(findPersonArr)); 
+console.log('Find Person: ', foundPerson(findPersonArr));
 
 //  ----------------------- Refactoring 2: -------------------------
-const inputJob = [{name: 'John', job: 'chef'}, {name: 'Sean', job: 'police officer'}, {name: 'Kate', job: 'programmer'}, {name: 'Dean', job: 'accountant'}];
+const inputJob = [
+	{ name: 'John', job: 'chef' },
+	{ name: 'Sean', job: 'police officer' },
+	{ name: 'Kate', job: 'programmer' },
+	{ name: 'Dean', job: 'accountant' },
+];
 
 //const names = [];
 // const findProgrammer = (input) => {
@@ -136,14 +155,21 @@ const inputJob = [{name: 'John', job: 'chef'}, {name: 'Sean', job: 'police offic
 // }
 
 const findProgrammer = (input) => {
-    return input.length ? [(input.find(p => p.job === 'programmer').name)] : input;
-}
+	return input.length
+		? [input.find((p) => p.job === 'programmer').name]
+		: input;
+};
 
 console.log('Find person with job "programmer": ', findProgrammer(inputJob));
 console.log('Find person in Empty Array: ', findProgrammer([]));
 
 //  ----------------------- Refactoring 3: -------------------------
-const arrayYoungestSalary = [{age: 25, salary: 4000}, {age: 40, salary: 5000}, {age: 35, salary: 2000}, {age: 18, salary: 3000}];
+const arrayYoungestSalary = [
+	{ age: 25, salary: 4000 },
+	{ age: 40, salary: 5000 },
+	{ age: 35, salary: 2000 },
+	{ age: 18, salary: 3000 },
+];
 const empty = [];
 
 // const findYoungestAndCountTotalSalary = (people) => {
@@ -158,10 +184,126 @@ const empty = [];
 // }
 
 const findYoungestAndCountTotalSalary = (people) => {
-    const totalSalary = people.reduce((acc, s) => acc += s.salary , 0);
-    const youngest = people.sort((a, b) => a.age - b.age)[0]?.age || Infinity;
-    return `youngestAge: ${youngest}, totalSalary: ${totalSalary}`;
+	const totalSalary = people.reduce((acc, s) => (acc += s.salary), 0);
+	const youngest = people.sort((a, b) => a.age - b.age)[0]?.age || Infinity;
+	return `youngestAge: ${youngest}, totalSalary: ${totalSalary}`;
+};
+
+console.log(
+	'Find youngest person and count total salary: ',
+	findYoungestAndCountTotalSalary(arrayYoungestSalary)
+);
+console.log(
+	'Find youngest person and count total salary. EMPTY case: ',
+	findYoungestAndCountTotalSalary(empty)
+);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Memoisation & Fibonacci sequence
+//---------------------------------------------------------------------------------------------------------------------------
+
+const fib = (n, prevValue = {}) => {
+	if (prevValue[n]) {
+		return prevValue[n];
+	}
+	if (n <= 1) {
+		return n;
+	}
+	const result = fib(n - 1, prevValue) + fib(n - 2, prevValue);
+	prevValue[n] = result;
+	return result;
+};
+
+console.log('Fibonacci', fib(500));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Unknown nesting
+//---------------------------------------------------------------------------------------------------------------------------
+
+function visitTree(tree) {
+	for (let key in tree) {
+		if (
+			Array.isArray(tree[key]) ||
+			(typeof tree[key] === 'object' &&
+				tree[key] != null &&
+				!(tree[key] instanceof Date))
+		) {
+			visitTree(tree[key]);
+		} else {
+			console.log(tree[key]);
+		}
+	}
 }
 
-console.log('Find youngest person and count total salary: ', findYoungestAndCountTotalSalary(arrayYoungestSalary)); 
-console.log('Find youngest person and count total salary. EMPTY case: ', findYoungestAndCountTotalSalary(empty)); 
+class Animal {
+    constructor(name){
+        this.name = name;
+    }
+}
+
+const randomTree = {
+    'one': 'one',
+    'two': new Date(),
+    'three': {
+        'four': 'object',
+        'five': {
+            'six': 6,
+            'seven': [7, 'string', null]
+        }
+    },
+    'eight': {
+        'null': null,
+        'array': [
+            [0, 1], ['stringArr1', 'stringArr2', {'objArr': {}}]
+        ],
+        'instanceClass': new Animal('MrCat')
+    }
+}
+
+visitTree(randomTree);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Get array of strings and return object with reversed strings 
+//---------------------------------------------------------------------------------------------------------------------------
+
+function reverseString(array) {
+    return array.reduce((acc, el ) => {
+        acc[el] = el.split('').reverse().join('');
+        return acc;
+    }, {})
+}
+
+console.log('Reverse string: ', reverseString(['one', 'two']));
+    
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Find number/string without pair
+//---------------------------------------------------------------------------------------------------------------------------
+
+const arrDoubles = [1, 2, 3, 4, 5, 1, 2, 3, 4];
+const lettersDoubles = ['a', 'a', 'b', 'c', 'b'];
+const stringsDoubles = ['abba', 'abba', 'bbb', 'ccc', 'bbb', 'yy'];
+const findNumberWithoutAPair1 = (arr) => {
+	const numbers =  Object.entries(arr.reduce((acc, num) => ({...acc, [num]:  acc[num] + 1 | 0}), {}))
+	.find(([key, val]) => val === 0);
+	return numbers ? +numbers[0] : 'There is no number without a pair';
+}
+console.log('Find number without a pair: ', findNumberWithoutAPair1(arrDoubles));
+
+const mathFindNumberWithoutAPair = (arr) => {
+	return Array.from(new Set(arr)).reduce((acc, cur) => acc + cur, 0) * 2 - arr.reduce((acc, cur) => acc + cur, 0);
+}
+console.log('Math find number without a pair: ', mathFindNumberWithoutAPair(arrDoubles));
+
+const findNumberWithoutAPair2 = (arr) => arr.reduce((acc, cur) =>  acc ^ cur, 0);
+console.log('Find number without a pair: ', findNumberWithoutAPair2(arrDoubles));
+
+const findLettersWithoutAPair = (arr) =>  {
+	const findUnique = arr.reduce((acc, str) => ({...acc, [str]: acc[str] + 1 | 0 }), {});
+	const stringsObj = Object.entries(findUnique).filter(([key, val]) => val === 0);
+	return stringsObj.length ? stringsObj.map(str => str[0]) : 'There is no unique strings';
+}
+console.log('Find string without a pair: ', findLettersWithoutAPair(stringsDoubles));
+console.log('Find letters without a pair by findLettersWithoutAPair: ', findLettersWithoutAPair(lettersDoubles));
+
+const findStringWithoutAPair = (arr) => String.fromCharCode(arr.map(el => el.charCodeAt(0)).reduce((acc, cur) =>  acc ^ cur));
+console.log('Find string without a pair: ', findStringWithoutAPair(lettersDoubles));
