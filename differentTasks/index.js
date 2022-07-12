@@ -220,19 +220,19 @@ console.log('Fibonacci', fib(500));
 //                                      Unknown nesting
 //---------------------------------------------------------------------------------------------------------------------------
 
-function visitTree(tree) {
+function visitTree(tree, stack = []) {
 	for (let key in tree) {
 		if (
-			Array.isArray(tree[key]) ||
-			(typeof tree[key] === 'object' &&
+			typeof tree[key] === 'object' &&
 				tree[key] != null &&
-				!(tree[key] instanceof Date))
+				!(tree[key] instanceof Date)
 		) {
-			visitTree(tree[key]);
+			visitTree(tree[key], stack);
 		} else {
-			console.log(tree[key]);
+			stack.push(tree[key]);
 		}
 	}
+	return stack;
 }
 
 class Animal {
@@ -260,7 +260,7 @@ const randomTree = {
     }
 }
 
-visitTree(randomTree);
+console.log('Unknown nesting: ', visitTree(randomTree));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Get array of strings and return object with reversed strings 
@@ -307,3 +307,92 @@ console.log('Find letters without a pair by findLettersWithoutAPair: ', findLett
 
 const findStringWithoutAPair = (arr) => String.fromCharCode(arr.map(el => el.charCodeAt(0)).reduce((acc, cur) =>  acc ^ cur));
 console.log('Find string without a pair: ', findStringWithoutAPair(lettersDoubles));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Palindrome
+//---------------------------------------------------------------------------------------------------------------------------
+
+const palindrome = (str) => {
+	const reverse = str.split('').reverse().join('');
+	return str.includes(reverse);
+	}
+	
+console.log('Palindrome: ', palindrome('tenet'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                      Roman to Integer
+//---------------------------------------------------------------------------------------------------------------------------
+
+const romanToInt1 = function(s) {
+	const roman = {
+			'I': 1,
+			'V': 5,
+			'X': 10,
+			'L': 50,
+			'C': 100,
+			'D': 500,
+			'M': 1000
+	}
+ 	return s.split('').reverse().reduce((acc, letter, i, arr) => {
+		if (
+				i < arr.length && i !== 0 &&
+				'XV'.includes(arr[i - 1]) && letter == 'I' ||
+				'LC'.includes(arr[i - 1]) && letter == 'X' ||
+				'DM'.includes(arr[i - 1]) && letter == 'C'
+			) {
+						acc -= roman[letter];
+				} else {
+						acc += roman[letter];
+				}
+				return acc;
+		}, 0)
+};
+
+const romanToInt = function(s) {
+	const roman = {
+			'I': 1,
+			'V': 5,
+			'X': 10,
+			'L': 50,
+			'C': 100,
+			'D': 500,
+			'M': 1000
+	}
+ 	let num = 0;
+	for (let i = 0; i < s.length; i++) {
+		roman[s[i]] < roman[s[i + 1]] ? num -= roman[s[i]] : num += roman[s[i]];
+	}
+	return num;
+};
+
+console.log('Roman: ', romanToInt1('MCMXCIV'), romanToInt('MCMXCIV')); 
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                     Functions-wrappers math operations
+//---------------------------------------------------------------------------------------------------------------------------
+
+// Function one get function as a param and return function call with param 1. If one doesn't get function as param, it returns 1.
+const one = (fn) => {
+	if (!fn) return 1;
+	return fn(1);
+};
+const three = (fn) => {
+	if (!fn) return 3;
+	return fn(3);
+};
+
+function plus1(a) {
+		return function(b) {
+			return a + b;
+		}
+}
+
+const plus = (a) => (b) =>  a + b; 
+const minus = (a) => (b) => b - a;
+const divide = (a) => (b) => b / a;
+const multiply = (a) => (b) => a * b;
+
+console.log('Plus: ', one(plus(three()))); // tree() return 3; plus(3) return (b) => 3 + b; one((b) => 3 + b) return (1) => 3 + 1;
+console.log('Minus: ', one(minus(three())));
+console.log('Divide: ', one(divide(three())));
+console.log('Multiply: ', one(multiply(three())));
