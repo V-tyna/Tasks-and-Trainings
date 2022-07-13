@@ -396,3 +396,24 @@ console.log('Plus: ', one(plus(three()))); // tree() return 3; plus(3) return (b
 console.log('Minus: ', one(minus(three())));
 console.log('Divide: ', one(divide(three())));
 console.log('Multiply: ', one(multiply(three())));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                     Longest prefix in array of strings
+//---------------------------------------------------------------------------------------------------------------------------
+
+const longestCommonPrefix = function(strings) {
+	let result = '';
+
+	for ( let i = 0; i < strings[0].length; i++) {
+		if(strings.every(word => word[i] === strings[0][i])) {
+			result += strings[0][i];
+		} else {
+			break;
+		}
+	}
+	return result;
+};
+
+const stringsPrefixes = ["flower","flow","flight"];
+
+console.log('Find longest prefix: ', longestCommonPrefix(stringsPrefixes));
