@@ -417,3 +417,37 @@ const longestCommonPrefix = function(strings) {
 const stringsPrefixes = ["flower","flow","flight"];
 
 console.log('Find longest prefix: ', longestCommonPrefix(stringsPrefixes));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Banknotes
+//---------------------------------------------------------------------------------------------------------------------------
+
+const getMoneyAtATM = (amount) => {
+	if(amount % 10 !== 0) {
+		return 'Please, enter an amount in multiples of 10';
+	}
+	const banknotes =  [1000, 500, 100, 50, 20, 10];
+	const result = {};
+	for (let i = 0; i < banknotes.length; i++) {
+		while(amount - banknotes[i] >= 0) {
+			amount -= banknotes[i];
+				result[banknotes[i]] = result[banknotes[i]] + 1 | 1;	
+		}
+	}
+	return result;
+}
+
+console.log('Get money: ', getMoneyAtATM(180));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Count sum by indexes
+//---------------------------------------------------------------------------------------------------------------------------
+
+const arrNumsSum = [-5, 1, 22, -9, 53, 7, -15]
+const indexToCount = [1, 3];
+
+const countSumByIndexes = (arr, indexes) => {
+	return arr.slice(indexes[0], indexes[1] + 1).reduce((acc, el) => acc += el, 0)
+}
+
+console.log('Count sum by indexes: ', countSumByIndexes(arrNumsSum, indexToCount));
