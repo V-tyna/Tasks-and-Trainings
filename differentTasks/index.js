@@ -224,8 +224,8 @@ function visitTree(tree, stack = []) {
 	for (let key in tree) {
 		if (
 			typeof tree[key] === 'object' &&
-				tree[key] != null &&
-				!(tree[key] instanceof Date)
+			tree[key] != null &&
+			!(tree[key] instanceof Date)
 		) {
 			visitTree(tree[key], stack);
 		} else {
@@ -236,45 +236,46 @@ function visitTree(tree, stack = []) {
 }
 
 class Animal {
-    constructor(name){
-        this.name = name;
-    }
+	constructor(name) {
+		this.name = name;
+	}
 }
 
 const randomTree = {
-    'one': 'one',
-    'two': new Date(),
-    'three': {
-        'four': 'object',
-        'five': {
-            'six': 6,
-            'seven': [7, 'string', null]
-        }
-    },
-    'eight': {
-        'null': null,
-        'array': [
-            [0, 1], ['stringArr1', 'stringArr2', {'objArr': {}}]
-        ],
-        'instanceClass': new Animal('MrCat')
-    }
-}
+	one: 'one',
+	two: new Date(),
+	three: {
+		four: 'object',
+		five: {
+			six: 6,
+			seven: [7, 'string', null],
+		},
+	},
+	eight: {
+		null: null,
+		array: [
+			[0, 1],
+			['stringArr1', 'stringArr2', { objArr: {} }],
+		],
+		instanceClass: new Animal('MrCat'),
+	},
+};
 
 console.log('Unknown nesting: ', visitTree(randomTree));
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                      Get array of strings and return object with reversed strings 
+//                                      Get array of strings and return object with reversed strings
 //---------------------------------------------------------------------------------------------------------------------------
 
 function reverseString(array) {
-    return array.reduce((acc, el ) => {
-        acc[el] = el.split('').reverse().join('');
-        return acc;
-    }, {})
+	return array.reduce((acc, el) => {
+		acc[el] = el.split('').reverse().join('');
+		return acc;
+	}, {});
 }
 
 console.log('Reverse string: ', reverseString(['one', 'two']));
-    
+
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Find number/string without pair
 //---------------------------------------------------------------------------------------------------------------------------
@@ -283,30 +284,62 @@ const arrDoubles = [1, 2, 3, 4, 5, 1, 2, 3, 4];
 const lettersDoubles = ['a', 'a', 'b', 'c', 'b'];
 const stringsDoubles = ['abba', 'abba', 'bbb', 'ccc', 'bbb', 'yy'];
 const findNumberWithoutAPair1 = (arr) => {
-	const numbers =  Object.entries(arr.reduce((acc, num) => ({...acc, [num]:  acc[num] + 1 | 0}), {}))
-	.find(([key, val]) => val === 0);
+	const numbers = Object.entries(
+		arr.reduce((acc, num) => ({ ...acc, [num]: (acc[num] + 1) | 0 }), {})
+	).find(([key, val]) => val === 0);
 	return numbers ? +numbers[0] : 'There is no number without a pair';
-}
-console.log('Find number without a pair: ', findNumberWithoutAPair1(arrDoubles));
+};
+console.log(
+	'Find number without a pair: ',
+	findNumberWithoutAPair1(arrDoubles)
+);
 
 const mathFindNumberWithoutAPair = (arr) => {
-	return Array.from(new Set(arr)).reduce((acc, cur) => acc + cur, 0) * 2 - arr.reduce((acc, cur) => acc + cur, 0);
-}
-console.log('Math find number without a pair: ', mathFindNumberWithoutAPair(arrDoubles));
+	return (
+		Array.from(new Set(arr)).reduce((acc, cur) => acc + cur, 0) * 2 -
+		arr.reduce((acc, cur) => acc + cur, 0)
+	);
+};
+console.log(
+	'Math find number without a pair: ',
+	mathFindNumberWithoutAPair(arrDoubles)
+);
 
-const findNumberWithoutAPair2 = (arr) => arr.reduce((acc, cur) =>  acc ^ cur, 0);
-console.log('Find number without a pair: ', findNumberWithoutAPair2(arrDoubles));
+const findNumberWithoutAPair2 = (arr) => arr.reduce((acc, cur) => acc ^ cur, 0);
+console.log(
+	'Find number without a pair: ',
+	findNumberWithoutAPair2(arrDoubles)
+);
 
-const findLettersWithoutAPair = (arr) =>  {
-	const findUnique = arr.reduce((acc, str) => ({...acc, [str]: acc[str] + 1 | 0 }), {});
-	const stringsObj = Object.entries(findUnique).filter(([key, val]) => val === 0);
-	return stringsObj.length ? stringsObj.map(str => str[0]) : 'There is no unique strings';
-}
-console.log('Find string without a pair: ', findLettersWithoutAPair(stringsDoubles));
-console.log('Find letters without a pair by findLettersWithoutAPair: ', findLettersWithoutAPair(lettersDoubles));
+const findLettersWithoutAPair = (arr) => {
+	const findUnique = arr.reduce(
+		(acc, str) => ({ ...acc, [str]: (acc[str] + 1) | 0 }),
+		{}
+	);
+	const stringsObj = Object.entries(findUnique).filter(
+		([key, val]) => val === 0
+	);
+	return stringsObj.length
+		? stringsObj.map((str) => str[0])
+		: 'There is no unique strings';
+};
+console.log(
+	'Find string without a pair: ',
+	findLettersWithoutAPair(stringsDoubles)
+);
+console.log(
+	'Find letters without a pair by findLettersWithoutAPair: ',
+	findLettersWithoutAPair(lettersDoubles)
+);
 
-const findStringWithoutAPair = (arr) => String.fromCharCode(arr.map(el => el.charCodeAt(0)).reduce((acc, cur) =>  acc ^ cur));
-console.log('Find string without a pair: ', findStringWithoutAPair(lettersDoubles));
+const findStringWithoutAPair = (arr) =>
+	String.fromCharCode(
+		arr.map((el) => el.charCodeAt(0)).reduce((acc, cur) => acc ^ cur)
+	);
+console.log(
+	'Find string without a pair: ',
+	findStringWithoutAPair(lettersDoubles)
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Palindrome
@@ -315,57 +348,64 @@ console.log('Find string without a pair: ', findStringWithoutAPair(lettersDouble
 const palindrome = (str) => {
 	const reverse = str.split('').reverse().join('');
 	return str.includes(reverse);
-	}
-	
+};
+
 console.log('Palindrome: ', palindrome('tenet'));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Roman to Integer
 //---------------------------------------------------------------------------------------------------------------------------
 
-const romanToInt1 = function(s) {
+const romanToInt1 = function (s) {
 	const roman = {
-			'I': 1,
-			'V': 5,
-			'X': 10,
-			'L': 50,
-			'C': 100,
-			'D': 500,
-			'M': 1000
-	}
- 	return s.split('').reverse().reduce((acc, letter, i, arr) => {
-		if (
-				i < arr.length && i !== 0 &&
-				'XV'.includes(arr[i - 1]) && letter == 'I' ||
-				'LC'.includes(arr[i - 1]) && letter == 'X' ||
-				'DM'.includes(arr[i - 1]) && letter == 'C'
+		I: 1,
+		V: 5,
+		X: 10,
+		L: 50,
+		C: 100,
+		D: 500,
+		M: 1000,
+	};
+	return s
+		.split('')
+		.reverse()
+		.reduce((acc, letter, i, arr) => {
+			if (
+				(i < arr.length &&
+					i !== 0 &&
+					'XV'.includes(arr[i - 1]) &&
+					letter == 'I') ||
+				('LC'.includes(arr[i - 1]) && letter == 'X') ||
+				('DM'.includes(arr[i - 1]) && letter == 'C')
 			) {
-						acc -= roman[letter];
-				} else {
-						acc += roman[letter];
-				}
-				return acc;
-		}, 0)
+				acc -= roman[letter];
+			} else {
+				acc += roman[letter];
+			}
+			return acc;
+		}, 0);
 };
 
-const romanToInt = function(s) {
+const romanToInt = function (s) {
 	const roman = {
-			'I': 1,
-			'V': 5,
-			'X': 10,
-			'L': 50,
-			'C': 100,
-			'D': 500,
-			'M': 1000
-	}
- 	let num = 0;
+		I: 1,
+		V: 5,
+		X: 10,
+		L: 50,
+		C: 100,
+		D: 500,
+		M: 1000,
+	};
+	let num = 0;
 	for (let i = 0; i < s.length; i++) {
-		roman[s[i]] < roman[s[i + 1]] ? num -= roman[s[i]] : num += roman[s[i]];
+		roman[s[i]] < roman[s[i + 1]]
+			? (num -= roman[s[i]])
+			: (num += roman[s[i]]);
 	}
 	return num;
 };
 
-console.log('Roman: ', romanToInt1('MCMXCIV'), romanToInt('MCMXCIV')); 
+console.log('Roman: ', romanToInt1('MCMXCIV'), romanToInt('MCMXCIV'));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                     Functions-wrappers math operations
@@ -382,12 +422,12 @@ const three = (fn) => {
 };
 
 function plus1(a) {
-		return function(b) {
-			return a + b;
-		}
+	return function (b) {
+		return a + b;
+	};
 }
 
-const plus = (a) => (b) =>  a + b; 
+const plus = (a) => (b) => a + b;
 const minus = (a) => (b) => b - a;
 const divide = (a) => (b) => b / a;
 const multiply = (a) => (b) => a * b;
@@ -401,11 +441,11 @@ console.log('Multiply: ', one(multiply(three())));
 //                                     Longest prefix in array of strings
 //---------------------------------------------------------------------------------------------------------------------------
 
-const longestCommonPrefix = function(strings) {
+const longestCommonPrefix = function (strings) {
 	let result = '';
 
-	for ( let i = 0; i < strings[0].length; i++) {
-		if(strings.every(word => word[i] === strings[0][i])) {
+	for (let i = 0; i < strings[0].length; i++) {
+		if (strings.every((word) => word[i] === strings[0][i])) {
 			result += strings[0][i];
 		} else {
 			break;
@@ -414,7 +454,7 @@ const longestCommonPrefix = function(strings) {
 	return result;
 };
 
-const stringsPrefixes = ["flower","flow","flight"];
+const stringsPrefixes = ['flower', 'flow', 'flight'];
 
 console.log('Find longest prefix: ', longestCommonPrefix(stringsPrefixes));
 
@@ -423,19 +463,19 @@ console.log('Find longest prefix: ', longestCommonPrefix(stringsPrefixes));
 //---------------------------------------------------------------------------------------------------------------------------
 
 const getMoneyAtATM = (amount) => {
-	if(amount % 10 !== 0) {
+	if (amount % 10 !== 0) {
 		return 'Please, enter an amount in multiples of 10';
 	}
-	const banknotes =  [1000, 500, 100, 50, 20, 10];
+	const banknotes = [1000, 500, 100, 50, 20, 10];
 	const result = {};
 	for (let i = 0; i < banknotes.length; i++) {
-		while(amount - banknotes[i] >= 0) {
+		while (amount - banknotes[i] >= 0) {
 			amount -= banknotes[i];
-				result[banknotes[i]] = result[banknotes[i]] + 1 | 1;	
+			result[banknotes[i]] = (result[banknotes[i]] + 1) | 1;
 		}
 	}
 	return result;
-}
+};
 
 console.log('Get money: ', getMoneyAtATM(180));
 
@@ -443,11 +483,44 @@ console.log('Get money: ', getMoneyAtATM(180));
 //                                    Count sum by indexes
 //---------------------------------------------------------------------------------------------------------------------------
 
-const arrNumsSum = [-5, 1, 22, -9, 53, 7, -15]
+const arrNumsSum = [-5, 1, 22, -9, 53, 7, -15];
 const indexToCount = [1, 3];
 
 const countSumByIndexes = (arr, indexes) => {
-	return arr.slice(indexes[0], indexes[1] + 1).reduce((acc, el) => acc += el, 0)
-}
+	return arr
+		.slice(indexes[0], indexes[1] + 1)
+		.reduce((acc, el) => (acc += el), 0);
+};
 
-console.log('Count sum by indexes: ', countSumByIndexes(arrNumsSum, indexToCount));
+console.log(
+	'Count sum by indexes: ',
+	countSumByIndexes(arrNumsSum, indexToCount)
+);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Parentheses
+//---------------------------------------------------------------------------------------------------------------------------
+
+const isValidParentheses = (s) => {
+	const left = ['(', '[', '{'];
+	const right = [')', ']', '}'];
+	const stack = [];
+	for (let i = 0; i < s.length; i++) {
+		if (left.includes(s[i])) {
+			stack.push(s[i]);
+		} else if (
+			stack.length &&
+			left.indexOf(stack[stack.length - 1]) === right.indexOf(s[i])
+		) {
+			stack.pop();
+		} else {
+			return false;
+		}
+	}
+	return !stack.length;
+};
+
+console.log('Valid Parentheses: ', isValidParentheses('(())[{}]'));
+console.log('Not Valid Parentheses: ', isValidParentheses('(())[{}]]{'));
+console.log('Not Valid Parentheses: ', isValidParentheses(')'));
+console.log('Not Valid Parentheses: ', isValidParentheses('([}}])'));
