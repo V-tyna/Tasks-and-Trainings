@@ -524,3 +524,53 @@ console.log('Valid Parentheses: ', isValidParentheses('(())[{}]'));
 console.log('Not Valid Parentheses: ', isValidParentheses('(())[{}]]{'));
 console.log('Not Valid Parentheses: ', isValidParentheses(')'));
 console.log('Not Valid Parentheses: ', isValidParentheses('([}}])'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Exclamation marks 
+//---------------------------------------------------------------------------------------------------------------------------
+
+function removeExclamations(s) {
+	return s
+		.split(' ')
+		.map((w) => {
+			if (w.startsWith('!') && w.endsWith('!')) {
+				const word = w
+					.split('')
+					.filter((l) => l !== '!')
+					.join('');
+
+				const firstIndexOfWord = w.indexOf(word);
+				const lastIndexOfWord = w.lastIndexOf(word[word.length - 1]);
+				const beforeWordExcl = w.slice(0, firstIndexOfWord).length;
+				const afterWordExcl = w.slice(lastIndexOfWord + 1).length;
+				let quantityOfExcl = 0;
+				if (beforeWordExcl >= afterWordExcl) {
+					quantityOfExcl = afterWordExcl;
+				} else {
+					quantityOfExcl = beforeWordExcl;
+				}
+
+				return (
+					'!'.repeat(quantityOfExcl) +
+					word +
+					'!'.repeat(quantityOfExcl)
+				);
+			} else {
+				return w
+					.split('')
+					.filter((letter) => letter !== '!')
+					.join('');
+			}
+		})
+		.join(' ');
+}
+console.log(
+	'Remove exclamations: ',
+	removeExclamations('!!!!Hi!! !!!!Hi !Hi!!!')
+);
+console.log(
+	'Remove exclamations: ',
+	removeExclamations(
+		'!!!!!!!hqaff!!! !!!!!!fzfms!!!!!!!! !!wzozx !!!!!!!!!!vbcsrby!!!!!!!!! !!!!!!!!!jguf !!!!!!!!!!munfjxe!!!!!!!'
+	)
+);
