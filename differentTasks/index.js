@@ -614,3 +614,44 @@ console.log(
 		'!!!!!!!hqaff!!! !!!!!!fzfms!!!!!!!! !!wzozx !!!!!!!!!!vbcsrby!!!!!!!!! !!!!!!!!!jguf !!!!!!!!!!munfjxe!!!!!!!'
 	)
 );
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Fun Dots
+//---------------------------------------------------------------------------------------------------------------------------
+
+const dots = (w, h) => {
+	const layout1 = '+---';
+	const layout2 = '| o ';
+	const row = layout1.repeat(w) + '+\n' + layout2.repeat(w) + '|\n';
+	const columns = row.repeat(h) + layout1.repeat(w) + '+';
+
+	return columns;
+}
+
+console.log(dots(3, 2));
+console.log(dots(1, 1));
+console.log(dots(5, 5));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Find missing letter
+//---------------------------------------------------------------------------------------------------------------------------
+
+function findMissingLetter(array) {
+  let alphabet = array[0].codePointAt(0) < 90 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 'abcdefghijklmnopqrstuvwxyz';
+	const first = alphabet.indexOf(array[0]);
+	const last = alphabet.indexOf(array[array.length - 1]);
+	const subStr = alphabet.substring(first, last).split('');
+
+	return subStr.find(l => array.join('').includes(l) === false);
+}
+
+//alternative :
+function findMissingLetterAlternative(array) {
+let i = array[0].charCodeAt();
+array.map(l => l.charCodeAt() === i ? i++ : i);
+return String.fromCharCode(i);
+}
+
+console.log('Find missing letter: ', findMissingLetter(['a', 'b', 'c', 'd', 'f']));
+console.log('Find missing letter: ', findMissingLetter(['O', 'Q', 'R', 'S', 'T']));
+console.log('Find missing letter alternative: ', findMissingLetterAlternative(['O', 'Q', 'R', 'S', 'T']));
