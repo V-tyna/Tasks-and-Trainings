@@ -352,6 +352,46 @@ const palindrome = (str) => {
 
 console.log('Palindrome: ', palindrome('tenet'));
 
+const palindromeNumbers = (num) => {
+	const str = num.toString();
+	const reverse = str.split('').reverse().join('');
+	return str === reverse;
+};
+
+console.log('Palindrome number: ', palindromeNumbers(12221));
+
+const subPalindrome = (str) => {
+	let start = 0;
+	let end = 0;
+
+	const result = [];
+	for (let i = 0; i < str.length; i++) {
+		let lenOdd = getLengthFromCenter(str, i, i);
+		let lenEven = getLengthFromCenter(str, i, i + 1);
+		let len = Math.max(lenOdd, lenEven);
+
+		if (len > end - start) {
+			start = Math.ceil(i - (len - 1) / 2);
+			end = Math.floor(i + len / 2);
+		}
+	}
+	return str.substring(start, end + 1);
+};
+
+const getLengthFromCenter = (str, left, right) => {
+	while (left >= 0 && right < str.length && str[left] === str[right]) {
+		left--;
+		right++;
+	}
+
+	return right - left - 1;
+};
+
+console.log('Sub Palindrome 1: ', subPalindrome('babad'));
+console.log('Sub Palindrome 1: ', subPalindrome('mississippi'));
+console.log('Sub Palindrome 2: ', subPalindrome('cbba'));
+console.log('Sub Palindrome 2: ', subPalindrome('cbb'));
+
 //---------------------------------------------------------------------------------------------------------------------------
 //                                      Roman to Integer
 //---------------------------------------------------------------------------------------------------------------------------
@@ -526,7 +566,7 @@ console.log('Not Valid Parentheses: ', isValidParentheses(')'));
 console.log('Not Valid Parentheses: ', isValidParentheses('([}}])'));
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                    Exclamation marks 
+//                                    Exclamation marks
 //---------------------------------------------------------------------------------------------------------------------------
 
 function removeExclamations(s) {
