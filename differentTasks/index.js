@@ -655,3 +655,68 @@ return String.fromCharCode(i);
 console.log('Find missing letter: ', findMissingLetter(['a', 'b', 'c', 'd', 'f']));
 console.log('Find missing letter: ', findMissingLetter(['O', 'Q', 'R', 'S', 'T']));
 console.log('Find missing letter alternative: ', findMissingLetterAlternative(['O', 'Q', 'R', 'S', 'T']));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Snail/Spiral matrix
+//---------------------------------------------------------------------------------------------------------------------------
+
+const snail = (h, w) => {
+	const matrix = [];
+	for (let i = 0; i < h; i++) {
+		matrix.push(new Array(w).fill(0));
+	}
+
+	let currentRow = 0;
+	let currentColumn = 0;
+	let i = 1;
+
+	const goRight = (row, column) => {
+		
+		while (column < w && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+			matrix[row][column] = i++;
+			column++;
+		}
+		currentRow = row + 1;
+		currentColumn = column - 1;
+	}
+
+	const goDown = (row, column) => {
+		while (row < h && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+			matrix[row][column] = i++;
+			row++;
+		}
+		currentRow = row - 1;
+		currentColumn = column - 1;
+	}
+
+	const goLeft = (row, column) => {
+		while (column >= 0 && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+			matrix[row][column] = i++;
+			column--;
+		}
+		currentRow = row - 1;
+		currentColumn = column + 1;
+	}
+
+	const goUp = (row, column) => {
+		while (row >= 0 && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+			matrix[row][column] = i++;
+			row--;
+		}
+		currentRow = row + 1;
+		currentColumn = column + 1;
+	}
+
+	while (i <= h * w) {
+		goRight(currentRow, currentColumn);
+		goDown(currentRow, currentColumn);
+		goLeft(currentRow, currentColumn);
+		goUp(currentRow, currentColumn);
+	}
+
+	return matrix;
+}
+
+console.table(snail(3, 5)); 
+console.table(snail(4, 4)); 
+console.table(snail(5, 5)); 
