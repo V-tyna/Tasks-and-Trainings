@@ -511,7 +511,7 @@ const getMoneyAtATM = (amount) => {
 	for (let i = 0; i < banknotes.length; i++) {
 		while (amount - banknotes[i] >= 0) {
 			amount -= banknotes[i];
-			result[banknotes[i]] = (result[banknotes[i]] + 1) | 1;
+			result[banknotes[i]] = (result[banknotes[i]] + 1) || 1;
 		}
 	}
 	return result;
@@ -720,3 +720,77 @@ const snail = (h, w) => {
 console.table(snail(3, 5)); 
 console.table(snail(4, 4)); 
 console.table(snail(5, 5)); 
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Sum of digits/Digital root
+//---------------------------------------------------------------------------------------------------------------------------
+
+const digital_root = (n) => {
+  if(n < 10) return n;
+
+	const num = n.toString().split('').reduce((acc, num) => acc + +num, 0);
+	return digital_root(num);
+}
+
+console.log('Digital root: ', digital_root(9427));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Decode Morse code
+//---------------------------------------------------------------------------------------------------------------------------
+
+const decodeMorse = (str) => {
+	const MORSE_CODE = {
+    ".-":"A",
+    "-...":"B",
+    "-.-.":"C",
+    "-..":"D",
+    ".":"E",
+    "..-.":"F",
+    "--.":"G",
+    "....":"H",
+    "..":"I",
+    ".---":"J",
+    "-.-":"K",
+    ".-..":"L",
+    "--":"M",
+    "-.":"N",
+    "---":"O",
+    ".--.":"P",
+    "--.-":"Q",
+    ".-.":"R",
+    "...":"S",
+    "-":"T",
+    "..-":"U",
+    "...-":"V",
+    ".--":"W",
+    "-..-":"X",
+    "-.--":"Y",
+    "--..":"Z",
+};
+return str.split(' ').map(w => MORSE_CODE[w] || ' ').join('').replaceAll('  ', ' '); 
+}
+
+console.log('Morse code: ', decodeMorse('.... . -.--   .--- ..- -.. .   .--- ..- -.. .')); 
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    To weird case
+//---------------------------------------------------------------------------------------------------------------------------
+
+const toWeirdCase = (string) => {
+	const arrWords = string.split(' ');
+	const toUpperCase = (w) => {
+		const arr = [];
+		for (let i = 0; i < w.length; i++) {
+			if (i % 2 === 0) {
+				arr.push(w[i].toUpperCase());
+			} else {
+				arr.push(w[i]);
+			}
+		}
+		return arr.join('');
+	}
+	
+	return arrWords.map(word => toUpperCase(word)).join(' ');
+}
+
+console.log('To weird case: ', toWeirdCase('Weird string case')); 
