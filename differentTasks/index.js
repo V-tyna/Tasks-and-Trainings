@@ -859,3 +859,22 @@ const sortNamesByLengthAndAlphabet = (names) => {
 }
 
 console.log('Sort names by length and alphabet: ', sortNamesByLengthAndAlphabet(['Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott']));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Get most profit from stock quotes 
+//---------------------------------------------------------------------------------------------------------------------------
+
+const getMostProfitFromStockQuotes = (quotes, sum = 0) => {
+	if(quotes.length < 2) return sum;
+	const highestNum = Math.max(...quotes);
+	const end = quotes.indexOf(highestNum);
+	sum += quotes.slice(0, end).reduce((acc, num) => acc += highestNum - num, 0);
+	const stack = quotes.slice(end + 1);
+
+	return getMostProfitFromStockQuotes(stack, sum);
+}
+
+console.log('Get most profit from stock quotes 1: ', getMostProfitFromStockQuotes([31,312,3,35,33,3,44,123,126,2,4,1]));
+console.log('Get most profit from stock quotes 2: ', getMostProfitFromStockQuotes([ 6, 5, 4, 3, 2, 1 ]));
+console.log('Get most profit from stock quotes 3: ', getMostProfitFromStockQuotes([ 1, 6, 5, 10, 8, 7 ]));
+console.log('Get most profit from stock quotes 4: ', getMostProfitFromStockQuotes([ 1, 2, 10, 3, 2, 7, 3, 2 ]));
