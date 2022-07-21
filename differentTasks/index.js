@@ -794,3 +794,68 @@ const toWeirdCase = (string) => {
 }
 
 console.log('To weird case: ', toWeirdCase('Weird string case')); 
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Tribonacci sequence
+//---------------------------------------------------------------------------------------------------------------------------
+
+const tribonacci = (signature,n) => {
+	if(n <= 2) return signature.slice(0, n);
+	for (let i = 2; i < n - 1; i++) {
+		signature.push(signature[i] + signature[i - 1] + signature[i - 2]);
+	}
+	return signature;
+	}
+
+console.log('Tribonacci: ', tribonacci([1, 1, 1], 10));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Find odd
+//---------------------------------------------------------------------------------------------------------------------------
+
+const findOdd = (a) => {
+	return Object.entries(a.reduce((acc, num) => ({...acc, [num]: acc[num] + 1 || 1 }), {})).find((key) => {
+		if (key[1] % 2 !== 0) {
+			return key;
+		}
+	})[0];
+ }
+
+ console.log('Find odd: ', findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Factorial and cache(memoization)
+//---------------------------------------------------------------------------------------------------------------------------
+
+const factorial = (function memoFactorial() {
+	const cache = {};
+	const factorial = (n) => {
+	if(n < 2) return 1;
+	if(!(n in cache)) {
+		cache[n] = n * factorial(n - 1);
+	} 
+	return cache[n];
+}
+return factorial;
+})();
+
+console.log('Factorial wrapped1: ', factorial(3));
+console.log('Factorial wrapped2: ', factorial(7));
+console.log('Factorial wrapped2: ', factorial(10));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Sort names by name.length and alphabet
+//---------------------------------------------------------------------------------------------------------------------------
+
+const sortNamesByLengthAndAlphabet = (names) => {
+	const stack = [];
+	names.forEach(name => {
+		if(!stack[name.length]) {
+			stack[name.length] = [];
+		} 
+		stack[name.length].push(name);
+	});
+	return stack.filter(arr => arr.sort().length !== 0).flat();
+}
+
+console.log('Sort names by length and alphabet: ', sortNamesByLengthAndAlphabet(['Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott']));
