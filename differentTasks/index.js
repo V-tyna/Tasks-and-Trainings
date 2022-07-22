@@ -878,3 +878,25 @@ console.log('Get most profit from stock quotes 1: ', getMostProfitFromStockQuote
 console.log('Get most profit from stock quotes 2: ', getMostProfitFromStockQuotes([ 6, 5, 4, 3, 2, 1 ]));
 console.log('Get most profit from stock quotes 3: ', getMostProfitFromStockQuotes([ 1, 6, 5, 10, 8, 7 ]));
 console.log('Get most profit from stock quotes 4: ', getMostProfitFromStockQuotes([ 1, 2, 10, 3, 2, 7, 3, 2 ]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Equal side of an array
+//---------------------------------------------------------------------------------------------------------------------------
+
+const equalSideOfAnArray = (arr) => {
+	let leftSum = 0;
+	let rightSum = arr.reduce((acc, num) => acc+= num, 0);
+  for (let i = 0; i < arr.length; i++) {
+    rightSum -= arr[i];
+    if (leftSum === rightSum) {
+      return i;
+    }
+    leftSum += arr[i];
+  }
+  return -1;
+}
+
+console.log('Find index of equal side of array: ', equalSideOfAnArray([1,2,3,4,3,2,1]));
+console.log('Find index of equal side of array: ', equalSideOfAnArray([1,100,50,-51,1,1]));
+console.log('Find index of equal side of array: ', equalSideOfAnArray([20,10,-80,10,10,15,35]));
+console.log('Find index of equal side of array: ', equalSideOfAnArray([8, 0]));
