@@ -900,3 +900,44 @@ console.log('Find index of equal side of array: ', equalSideOfAnArray([1,2,3,4,3
 console.log('Find index of equal side of array: ', equalSideOfAnArray([1,100,50,-51,1,1]));
 console.log('Find index of equal side of array: ', equalSideOfAnArray([20,10,-80,10,10,15,35]));
 console.log('Find index of equal side of array: ', equalSideOfAnArray([8, 0]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Merge and sort two arrays
+//---------------------------------------------------------------------------------------------------------------------------
+
+const mergeTwoArrays = (list1, list2) => {
+    return list1.concat(list2).sort((a, b) => a - b);
+};
+
+console.log('Merge two arrays: ', mergeTwoArrays([1, 2, 3], [1, 2, 3]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Frog jumping
+//---------------------------------------------------------------------------------------------------------------------------
+
+const frogJumps = (a, pos = 0, jumps = 0, stack = {}) => {
+	if (a[pos] === undefined) return jumps;
+	if (stack[pos] > 2) return -1;
+	pos += a[pos];
+	jumps++;
+	stack[pos] = stack[pos] + 1 || 1;
+	return frogJumps(a, pos, jumps, stack);
+}
+
+const frogJumps2 = (a) => {
+	let jumps = 0;
+	let i = 0;
+	while(a[i] !== undefined) {
+		jumps++;
+		i += a[i];
+		if(jumps > a.length) return -1;
+	}
+	return jumps;
+}
+
+console.log('Frog jumps: ', frogJumps([1, 2, 2, -1]));
+console.log('Frog jumps: ', frogJumps([1, 2, 1, 5]));
+console.log('Frog jumps: ', frogJumps2([1, 1, 1, 1]));
+console.log('Frog jumps: ', frogJumps([-3]));
+console.log('Frog jumps: ', frogJumps([1, -1]));
+console.log('Frog jumps: ', frogJumps2([1, 1, 1, -2, 1]));
