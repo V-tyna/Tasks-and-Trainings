@@ -941,3 +941,64 @@ console.log('Frog jumps: ', frogJumps2([1, 1, 1, 1]));
 console.log('Frog jumps: ', frogJumps([-3]));
 console.log('Frog jumps: ', frogJumps([1, -1]));
 console.log('Frog jumps: ', frogJumps2([1, 1, 1, -2, 1]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Twisted sum
+//---------------------------------------------------------------------------------------------------------------------------
+
+const twistedSum = (n) => {
+	let sum = 0;
+  while(n >= 0) {
+		if(n > 9) {
+			sum += n.toString().split('').reduce((acc, num) => acc + +num, 0);
+		} else {
+			sum += n;
+		}
+		n--;
+		}
+  return sum;  
+}
+
+console.log('Twisted sum: ', twistedSum(9686));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Odd Magic Square / Matrix
+//---------------------------------------------------------------------------------------------------------------------------
+
+const oddMagicSquare = (n) => {
+	const matrix = [];
+	for (let i = 0; i < n; i++) {
+		matrix.push(new Array(n).fill(0));
+	}
+	let row = 0;
+	let column = Math.floor(n / 2);
+	
+	let num = 1;
+	matrix[row][column] = num;
+
+	while(num < n * n) {
+		num++;
+		row--;
+		column++;
+		if (row < 0 && column >=n) {
+			row += 2;
+			column--;	
+		}
+		else if (row < 0) {
+			row = n - 1;
+		}
+		else if (column >= n) {
+			column = 0;
+		}
+		else if (matrix[row][column] !== 0) {
+			row += 2;
+			column--;	
+		}
+		matrix[row][column] = num;
+	}
+	
+	return matrix;
+}
+
+console.table(oddMagicSquare(7));
+console.table(oddMagicSquare(5));
