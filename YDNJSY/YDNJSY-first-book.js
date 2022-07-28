@@ -157,3 +157,25 @@ console.log(slotMachine.display());
 // ♦ | ♠ | ♣
 // ♣ | ♥ | ☺
 // ☺ | ♦ | ★
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Closures toggle
+//---------------------------------------------------------------------------------------------------------------------------
+
+const toggle = (...args) => {
+	let counter = 0;
+	return function() {
+		console.log(args[counter]);
+		counter++;
+		if(counter >= args.length) {
+			counter = 0;
+		}
+	}
+}
+const hello = toggle('hello');
+const onOff = toggle('on', 'off');
+const speed = toggle('slow', 'medium', 'fast');
+
+hello(), hello();
+onOff(), onOff(), onOff();
+speed(), speed(), speed(), speed();
