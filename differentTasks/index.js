@@ -1002,3 +1002,67 @@ const oddMagicSquare = (n) => {
 
 console.table(oddMagicSquare(7));
 console.table(oddMagicSquare(5));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Create Functions 
+//---------------------------------------------------------------------------------------------------------------------------
+
+const createFunction = (n) => {
+	let i = 0;
+	return new Array(n).fill(() => i++);
+}
+
+const callbacks = createFunction(5);
+
+console.log('Call 5 functions: ', callbacks[0](), callbacks[1](), callbacks[2](), callbacks[3](), callbacks[4]());
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Using closures to share class state
+//---------------------------------------------------------------------------------------------------------------------------
+
+// Functional style
+const Cat1 = (function (){
+	const cats = [];
+	function constructor(name, weight) {
+		if(!name || !weight) throw new Error('no params');
+		this.name = name;
+		this.weight = weight;
+		// Object.defineProperty(this, 'weight', {get: () => weight, set: (value) => weight = value})
+		
+		cats.push(this);
+	}
+	
+	constructor.averageWeight = () => {
+		return cats.reduce((acc, cat) => (acc + cat.weight), 0)/ cats.length;
+	};
+
+	return constructor;
+})();
+
+// Classes
+
+class Cat {
+	static cats = [];
+	constructor(name, weight) {
+		if(!name || !weight) throw new Error('no params');
+		this.name = name;
+		this.weight = weight;
+		Cat.cats.push(this);
+	}
+	
+	static averageWeight() {
+		return this.cats.reduce((acc, cat) => (acc + cat.weight), 0)/ this.cats.length;
+	}
+}
+
+fluffy = new Cat('fluffy', 15);
+fluffy.weight = 13;
+garfield = new Cat('garfield', 25);
+
+
+console.log(fluffy.weight, 15);
+console.log(fluffy instanceof Cat, true);
+console.log(fluffy.averageWeight, undefined);
+console.log(typeof Cat.averageWeight, 'function');
+console.log(Cat.averageWeight(), 20);
+console.log(Cat.cats, [{name: 'fluffy', weight: 13}, {name: 'garfield', weight: 25}]);
