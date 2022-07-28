@@ -1066,3 +1066,19 @@ console.log(fluffy.averageWeight, undefined);
 console.log(typeof Cat.averageWeight, 'function');
 console.log(Cat.averageWeight(), 20);
 console.log(Cat.cats, [{name: 'fluffy', weight: 13}, {name: 'garfield', weight: 25}]);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Is Pangram
+//---------------------------------------------------------------------------------------------------------------------------
+
+function isPangram(string) {
+  const lettersInString = {};
+  for (let letter of string) {
+  	if (letter.match(/[a-z]/)) {
+      lettersInString[letter] = 1;
+    }
+  }
+  return Object.keys(lettersInString).length === 26;
+}
+
+console.log(isPangram('The quick brown fox jumps over the lazy dog.'));
