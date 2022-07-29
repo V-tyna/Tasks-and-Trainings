@@ -1071,14 +1071,44 @@ console.log(Cat.cats, [{name: 'fluffy', weight: 13}, {name: 'garfield', weight: 
 //                                    Is Pangram
 //---------------------------------------------------------------------------------------------------------------------------
 
-function isPangram(string) {
-  const lettersInString = {};
-  for (let letter of string) {
-  	if (letter.match(/[a-z]/)) {
-      lettersInString[letter] = 1;
-    }
-  }
-  return Object.keys(lettersInString).length === 26;
+// function isPangram(string) {
+// 	string = string.toLowerCase();
+//   const lettersInString = {};
+//   for (let letter of string) {
+//   	if (letter.match(/[a-z]/)) {
+//       lettersInString[letter] = 1;
+//     }
+//   }
+//   return Object.keys(lettersInString).length === 26;
+// }
+
+const isPangram = (string) => {
+	string = string.toLowerCase();
+  return 'abcdefghijklmnopqrstuvwxyz'.split('').every(letter => string.includes(letter));
 }
 
-console.log(isPangram('The quick brown fox jumps over the lazy dog.'));
+console.log('Is a pangram:', isPangram('The quick brown fox jumps over the lazy dog.'));
+console.log('Is a pangram:', isPangram('Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game.'));
+console.log('Is a pangram:', isPangram('This in not a pangram.'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Delete number that is in array more than n-times
+//---------------------------------------------------------------------------------------------------------------------------
+
+const deleteNth = (arr, n) => {
+  const obj = arr.reduce((acc, num) => ({...acc, [num]: acc[num] + 1 || 1}), {});
+	let reducer = 0;
+	for (let key in obj) {
+		if (obj[key] > n) {
+			reducer = obj[key] - n;
+			while (reducer > 0) {
+				arr.splice(arr.lastIndexOf(+key), 1);
+				reducer--;
+			}
+		}
+	}
+  return arr;
+}
+
+console.log('Delete n times', deleteNth([1,1,3,3,7,2,2,2,2], 3), [1, 1, 3, 3, 7, 2, 2, 2]);
+console.log('Delete n times', deleteNth([20,37,20,21], 1), [20,37,21]);
