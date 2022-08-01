@@ -1112,3 +1112,88 @@ const deleteNth = (arr, n) => {
 
 console.log('Delete n times', deleteNth([1,1,3,3,7,2,2,2,2], 3), [1, 1, 3, 3, 7, 2, 2, 2]);
 console.log('Delete n times', deleteNth([20,37,20,21], 1), [20,37,21]);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Snail Sort
+//---------------------------------------------------------------------------------------------------------------------------
+
+// First approach
+
+const snail2 = (array) => {
+	if(array.length < 2) return array[0];
+  let elements = array.reduce((acc, n) => acc += n.length, 0);
+	const lengthInnerArr = array[0].length;
+  let currentRow = 0;
+  let currentCol = 0;
+  const res = [];
+  const moveRight = (row, col) => {
+    while(col < lengthInnerArr && array[row][col] !== 0) {
+      res.push(array[row][col]);
+      array[row][col] = 0;
+      col++;
+    }
+    currentRow++;
+    currentCol = col - 1;
+  }
+  const moveDown = (row, col) => {
+    while(row < lengthInnerArr && array[row][col] !== 0) {
+      res.push(array[row][col]);
+      array[row][col] = 0;
+      row++;
+    }
+    currentCol--;
+    currentRow = row - 1;
+  }
+  const moveLeft = (row, col) => {
+    while(col >= 0 && array[row][col] !== 0) {
+      res.push(array[row][col]);
+      array[row][col] = 0;
+      col--;
+    }
+    currentRow--;
+    currentCol = col + 1;
+  }
+  const moveUp = (row, col) => {
+    while(row >= 0 && array[row][col] !== 0) {
+      res.push(array[row][col]);
+      array[row][col] = 0;
+      row--;
+    }
+    currentRow = row + 1;
+    currentCol++;
+  }
+  while(elements) {
+    moveRight(currentRow, currentCol);
+    moveDown(currentRow, currentCol);
+    moveLeft(currentRow, currentCol);
+    moveUp(currentRow, currentCol);
+    elements--;
+  }
+  
+  return res;
+}
+
+// Second approach 
+
+const snail1 = (array) => {
+	let res = [];
+	
+	while(array.length) {
+		res = res.concat(array.shift());
+		for (let i = 0; i < array.length; i++) {
+			res.push(array[i].pop());
+		}
+		if (array[array.length - 1]) {
+		res.push(...array.pop().reverse());
+		}
+		for (let i = array.length - 1; i >= 0; i--) {
+			res.push(array[i].shift());
+		}
+	}
+
+	return res;
+}
+
+console.log('Snail 1: ', snail1([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
+console.log('Snail 1: ', snail1([[1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 7], [19, 32, 33, 34, 25, 8], [18, 31, 36, 35, 26, 9], [17, 30, 29, 28, 27, 10], [16, 15, 14, 13, 12, 11]]));
+console.log('Snail 1: ', snail1([[1], [1]]));
