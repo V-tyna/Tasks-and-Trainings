@@ -1197,3 +1197,74 @@ const snail1 = (array) => {
 console.log('Snail 1: ', snail1([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
 console.log('Snail 1: ', snail1([[1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 7], [19, 32, 33, 34, 25, 8], [18, 31, 36, 35, 26, 9], [17, 30, 29, 28, 27, 10], [16, 15, 14, 13, 12, 11]]));
 console.log('Snail 1: ', snail1([[1], [1]]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Rotate a square matrix like a vortex
+//---------------------------------------------------------------------------------------------------------------------------
+
+const rotateMatrixLikeAVortex = (arr) => {
+	const matrix = [];
+	let coord = Math.floor(arr.length/2);
+	
+	for(let i = 0; i < arr.length; i++) {
+		matrix.push(new Array(arr.length));
+	}
+	
+	if (arr.length % 2 !== 0) {
+		matrix[coord][coord] = arr[coord][coord];
+	} 
+	
+	const rotate = (arr, firstCoord, lastCoord) => {
+		// first rotate
+		for(let i = firstCoord; i <= lastCoord; i++) {
+			matrix[lastCoord][i] = arr[i][firstCoord]; 
+		}
+		// second rotate
+		for(let i = firstCoord + 1; i <= lastCoord; i++) {
+			matrix[arr.length - 1 - i][lastCoord] = arr[lastCoord][i]; 
+		}
+		// third rotate
+		for(let i = lastCoord; i > firstCoord; i--) {
+			matrix[firstCoord][i - 1] = arr[i - 1][lastCoord]; 
+		}
+		// forth rotate
+		for(let i = lastCoord; i > firstCoord; i--) {
+			matrix[arr.length - 1 - i][firstCoord] = arr[firstCoord][i]; 
+		}
+	}
+
+	while(coord > 0) {
+		let arrToRotate = arr.map(el => [...el]);
+		let countRotates = 0;
+		coord--;
+		let [firstCoord, lastCoord] = [coord, arr.length - 1 - coord];
+
+		while (countRotates <= coord) {
+			if (countRotates >= 1) {
+				arrToRotate = matrix.map(el => [...el]);
+			} 
+			rotate(arrToRotate, firstCoord, lastCoord);
+			countRotates++;
+		}
+	}
+
+	return matrix;
+}
+
+console.log('Rotate matrix like a vortex: ', rotateMatrixLikeAVortex([[1, 5, 3, 6, 1, 2], [1, 5, 8, 7, 4, 3], [1, 1, 2, 4, 3, 4], [1, 3, 1, 2, 2, 5], [1, 3, 1, 2, 2, 6], [1, 3, 1, 2, 2, 6]]));
+console.log('Rotate matrix like a vortex: ', rotateMatrixLikeAVortex([[1, 5, 3, 6, 1], [1, 5, 8, 7, 4], [1, 1, 2, 4, 3], [1, 3, 1, 2, 2], [1, 3, 1, 2, 2]]));
+console.log('Rotate: ', rotateMatrixLikeAVortex([ [ 5, 2, 5, 6, 4, 6, 1, 6, 1, 9, 8, 5, 1, 6, 7 ],
+  [ 8, 2, 7, 5, 2, 7, 9, 5, 4, 8, 8, 9, 8, 9, 1 ],
+  [ 6, 9, 5, 1, 1, 8, 7, 3, 9, 1, 5, 9, 5, 5, 3 ],
+  [ 6, 3, 9, 1, 1, 1, 5, 1, 1, 4, 9, 4, 1, 6, 5 ],
+  [ 2, 4, 4, 3, 5, 9, 2, 2, 6, 8, 3, 6, 3, 9, 9 ],
+  [ 9, 7, 4, 5, 9, 7, 6, 9, 5, 8, 6, 2, 1, 2, 9 ],
+  [ 1, 2, 8, 1, 2, 7, 5, 4, 5, 8, 7, 6, 6, 4, 9 ],
+  [ 5, 4, 3, 8, 8, 6, 8, 2, 5, 5, 1, 1, 2, 8, 7 ],
+  [ 6, 7, 1, 5, 9, 4, 8, 2, 7, 2, 2, 5, 4, 1, 1 ],
+  [ 4, 8, 3, 5, 4, 5, 9, 6, 2, 9, 4, 7, 6, 4, 2 ],
+  [ 4, 3, 6, 3, 1, 5, 9, 9, 9, 6, 4, 6, 3, 6, 1 ],
+  [ 3, 5, 6, 8, 1, 6, 6, 9, 3, 1, 9, 9, 3, 8, 5 ],
+  [ 2, 5, 5, 1, 8, 1, 5, 1, 4, 7, 5, 5, 5, 3, 8 ],
+  [ 4, 1, 3, 4, 4, 9, 4, 9, 2, 2, 6, 1, 4, 5, 5 ],
+  [ 9, 3, 8, 9, 3, 8, 4, 6, 1, 7, 7, 1, 1, 1, 6 ] ]));
