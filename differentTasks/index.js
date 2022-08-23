@@ -1234,7 +1234,7 @@ const rotateMatrixLikeAVortex = (arr) => {
 	}
 
 	while(coord > 0) {
-		let arrToRotate = arr.map(el => [...el]);
+		let arrToRotate = arr;
 		let countRotates = 0;
 		coord--;
 		let [firstCoord, lastCoord] = [coord, arr.length - 1 - coord];
@@ -1268,3 +1268,19 @@ console.log('Rotate: ', rotateMatrixLikeAVortex([ [ 5, 2, 5, 6, 4, 6, 1, 6, 1, 9
   [ 2, 5, 5, 1, 8, 1, 5, 1, 4, 7, 5, 5, 5, 3, 8 ],
   [ 4, 1, 3, 4, 4, 9, 4, 9, 2, 2, 6, 1, 4, 5, 5 ],
   [ 9, 3, 8, 9, 3, 8, 4, 6, 1, 7, 7, 1, 1, 1, 6 ] ]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Return the total number of smiling faces in the array
+//---------------------------------------------------------------------------------------------------------------------------
+
+function countSmileys(arr) {
+  const valid = [':)', ':D', ';-D', ':~)', ';~D', ':-)']
+  return arr.filter((str) => {
+    return valid.includes(str);
+  }).length;
+}
+
+console.log('Count smiles:', countSmileys([':D',':~)',';~D',':)']));
+console.log('Count smiles:', countSmileys([':)',':(',':D',':O',':;']));
+console.log('Count smiles:', countSmileys([';]', ':[', ';*', ':$', ';-D']));
+console.log('Count smiles:', countSmileys([]));
