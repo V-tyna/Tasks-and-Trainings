@@ -1274,13 +1274,29 @@ console.log('Rotate: ', rotateMatrixLikeAVortex([ [ 5, 2, 5, 6, 4, 6, 1, 6, 1, 9
 //---------------------------------------------------------------------------------------------------------------------------
 
 function countSmileys(arr) {
-  const valid = [':)', ':D', ';-D', ':~)', ';~D', ':-)']
-  return arr.filter((str) => {
-    return valid.includes(str);
-  }).length;
+  const valid = [':)', ';)', ':D', ';D', ':-D', ':~D', ';-D', ';~D', ':~)', ';~)', ':-)', ';-)'];
+  return arr.filter((str) => valid.includes(str)).length;
 }
 
 console.log('Count smiles:', countSmileys([':D',':~)',';~D',':)']));
 console.log('Count smiles:', countSmileys([':)',':(',':D',':O',':;']));
 console.log('Count smiles:', countSmileys([';]', ':[', ';*', ':$', ';-D']));
 console.log('Count smiles:', countSmileys([]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Split string into pairs
+//---------------------------------------------------------------------------------------------------------------------------
+
+function pairLetters(str){
+  const res = [];
+	let i = 0;
+	while (i < str.length) {
+		const second = str[i + 1] || '_';
+		res.push(str[i] + second);
+		i += 2;
+	}
+  return res;
+}
+
+
+console.log('Pair letters: ', pairLetters('aabbccddffg'));
