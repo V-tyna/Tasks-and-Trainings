@@ -1298,5 +1298,27 @@ function pairLetters(str){
   return res;
 }
 
-
 console.log('Pair letters: ', pairLetters('aabbccddffg'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Highest Scoring Word
+//---------------------------------------------------------------------------------------------------------------------------
+
+function high(x){
+  let temp = 0;
+	const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const res = x.split(' ').reduce((acc, word) => {
+    for (let l of word) {
+      temp += alphabet.indexOf(l) + 1;  
+    }
+    acc = [...acc, [word, temp]]
+    temp = 0;
+    return acc;
+  }, [])
+	console.log(res);
+  return res.sort((a, b) => b[1] - a[1])[0][0];
+}
+
+console.log('Highest word: ', high('man i need a taxi up to ubud'));
+console.log('Highest word: ', high('what time are we climbing up the volcano'));
+console.log('Highest word: ', high('aa b'));
