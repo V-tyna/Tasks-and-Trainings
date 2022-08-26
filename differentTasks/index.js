@@ -1315,10 +1315,41 @@ function high(x){
     temp = 0;
     return acc;
   }, [])
-	console.log(res);
   return res.sort((a, b) => b[1] - a[1])[0][0];
 }
 
 console.log('Highest word: ', high('man i need a taxi up to ubud'));
 console.log('Highest word: ', high('what time are we climbing up the volcano'));
 console.log('Highest word: ', high('aa b'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Longest consequence
+//---------------------------------------------------------------------------------------------------------------------------
+
+function longestConsec(strarr, k) {
+	const res = [];
+	if( k === 0 || k > strarr.length || k <= 0) return '';
+	if (k === 1) {
+		return strarr.sort((a, b) => b.length - a.length)[0];
+	}
+ 	while (strarr.length > 0) {
+	 	let temp = '';
+		if (strarr.length < k) {
+			return res[0];
+		}
+	 for (let i = 0; i < k; i++) {
+		 temp += strarr[i];
+	 }
+	 if (!res[0]) {
+		res.push(temp)
+	 }
+	 if (res[0] && res[0].length < temp.length) {
+		res.pop();
+		res.push(temp);
+	 }
+	 strarr.shift();
+ }
+}
+
+console.log('longest consequence: ', longestConsec(["zone", "abigail", "theta", "form", "libe", "zas"], 2));
+console.log('longest consequence: ', longestConsec(["aa", "bb", "cc", "dd", "ee", "hh"], 6));
