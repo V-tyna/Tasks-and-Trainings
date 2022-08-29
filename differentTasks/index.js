@@ -1353,3 +1353,34 @@ function longestConsec(strarr, k) {
 
 console.log('longest consequence: ', longestConsec(["zone", "abigail", "theta", "form", "libe", "zas"], 2));
 console.log('longest consequence: ', longestConsec(["aa", "bb", "cc", "dd", "ee", "hh"], 6));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Moving Zeros To The End
+
+//---------------------------------------------------------------------------------------------------------------------------
+
+// First way: 
+
+function moveZeros(arr) {
+	const zeros= [];
+	arr.forEach(el => {
+	 if (el === 0) {
+		 zeros.push(0);
+	 } 
+	})
+	const res = arr.filter(el => el !== 0);
+	return [...res, ...zeros];
+ }
+
+ // Second way: 
+
+ function moveZeros2(arr) {
+	return [
+		...arr.filter(el => el !== 0),
+		...arr.filter(el => el === 0)
+	];
+ }
+
+ console.log('Move zeros: ', moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));
+ console.log('Move zeros: ', moveZeros([8, 6, '9', [], [], 0, '5', false, [], 3, [], 1, null, {}, false, [], '7', '2', {}, null, true, '5', {}, 8, 6, '6', 0]));
+ console.log('Move zeros2: ', moveZeros2(['3', 0, 0, 0, '9', false, 6, null, 4, [], [], '2', {}, false, 5, 6]));
