@@ -1356,7 +1356,6 @@ console.log('longest consequence: ', longestConsec(["aa", "bb", "cc", "dd", "ee"
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Moving Zeros To The End
-
 //---------------------------------------------------------------------------------------------------------------------------
 
 // First way: 
@@ -1384,3 +1383,22 @@ function moveZeros(arr) {
  console.log('Move zeros: ', moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));
  console.log('Move zeros: ', moveZeros([8, 6, '9', [], [], 0, '5', false, [], 3, [], 1, null, {}, false, [], '7', '2', {}, null, true, '5', {}, 8, 6, '6', 0]));
  console.log('Move zeros2: ', moveZeros2(['3', 0, 0, 0, '9', false, 6, null, 4, [], [], '2', {}, false, 5, 6]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Human readable time
+//---------------------------------------------------------------------------------------------------------------------------
+
+function humanReadable (seconds) {
+	
+	let hh = '0' + Math.trunc(seconds / 3600);
+	seconds -= (hh * 3600);
+	
+	let mm = '0' + Math.trunc(seconds / 60);
+	seconds -= (mm * 60);
+	
+	let ss = '0' + seconds;
+
+	return `${hh.slice(-2)}:${mm.slice(-2)}:${ss.slice(-2)}`;
+}
+
+console.log('Human readable time: ', humanReadable(3599));
