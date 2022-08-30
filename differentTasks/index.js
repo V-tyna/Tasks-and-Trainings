@@ -1455,3 +1455,20 @@ function rot13(message){
 }
 
 console.log('Caesar cipher: ', rot13('Ndjn | lsldl { jsjk} '));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Pete, the baker
+//---------------------------------------------------------------------------------------------------------------------------
+
+function cakes(recipe, available) {
+	let amount = [];
+	for (let ingr in recipe) {
+		if (!available[ingr] || available[ingr] < recipe[ingr]) return 0;
+		if (available[ingr] >= recipe[ingr]) {
+			amount.push(Math.trunc(available[ingr] / recipe[ingr]));
+		}
+	}
+  return Math.min(...amount);
+}
+
+console.log('Pete, the baker: ', cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}));
