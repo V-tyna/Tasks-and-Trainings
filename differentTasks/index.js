@@ -1434,3 +1434,24 @@ function dirReduc(arr){
 }
 
 console.log('Directions Reduction: ', dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Caesar cipher
+//---------------------------------------------------------------------------------------------------------------------------
+
+function rot13(message){
+  return message.split('').map(l => {
+		const alphabet = 'abcdefghijklmnopqrstuvwxyz'.includes(l) ? 'abcdefghijklmnopqrstuvwxyz' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		let lIndex = alphabet.indexOf(l);
+		if(lIndex === -1) {
+			return l;
+		}
+		let newIndex = lIndex + 13;
+		if (newIndex >= 26) {
+			newIndex = 13 - (26 - lIndex);
+		}
+		return alphabet[newIndex];
+	}).join('');
+}
+
+console.log('Caesar cipher: ', rot13('Ndjn | lsldl { jsjk} '));
