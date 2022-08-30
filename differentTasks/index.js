@@ -1402,3 +1402,35 @@ function humanReadable (seconds) {
 }
 
 console.log('Human readable time: ', humanReadable(3599));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Anagrams
+//---------------------------------------------------------------------------------------------------------------------------
+
+function anagrams(word, words) {
+	return words.filter(w => w.split('').sort().join() === word.split('').sort().join());
+}
+
+console.log('Anagrams: ', anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Directions Reduction
+//---------------------------------------------------------------------------------------------------------------------------
+
+function dirReduc(arr){
+	const stack = [];
+	arr.map((dir) => {
+		if (stack[stack.length - 1] && 
+			stack[stack.length - 1] === 'NORTH' && dir === 'SOUTH' 
+			|| stack[stack.length - 1] === 'SOUTH' && dir === 'NORTH' 
+			|| stack[stack.length - 1] === 'WEST' && dir === 'EAST' 
+			|| stack[stack.length - 1] === 'EAST' && dir === 'WEST') {
+			stack.pop();
+		} else {
+			stack.push(dir);
+		}
+	})
+	return stack;
+}
+
+console.log('Directions Reduction: ', dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]));
