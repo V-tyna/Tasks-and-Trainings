@@ -1472,3 +1472,20 @@ function cakes(recipe, available) {
 }
 
 console.log('Pete, the baker: ', cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    The Hashtag Generator
+//---------------------------------------------------------------------------------------------------------------------------
+
+function generateHashtag (str) {
+	str = str.replace(/ +/g, ' ');
+  if (str === '' || str === ' ') return false;
+  const finalWord = `#${str.split(' ').map(w => w = w[0].toUpperCase() + w.slice(1)).join('')}`;
+	return finalWord.length > 140 ? false : finalWord;
+}
+
+console.log('The Hashtag Generator: ', generateHashtag('Do We have A Hashtag'));
+console.log('The Hashtag Generator: ', generateHashtag('code' + ' '.repeat(140) + 'wars'));
+console.log('The Hashtag Generator: ', generateHashtag(' '.repeat(200)));
+console.log('The Hashtag Generator: ', generateHashtag(''));
+
