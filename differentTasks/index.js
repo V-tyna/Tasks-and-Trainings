@@ -1489,3 +1489,23 @@ console.log('The Hashtag Generator: ', generateHashtag('code' + ' '.repeat(140) 
 console.log('The Hashtag Generator: ', generateHashtag(' '.repeat(200)));
 console.log('The Hashtag Generator: ', generateHashtag(''));
 
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Weight for weight
+//---------------------------------------------------------------------------------------------------------------------------
+
+function orderWeight(string) {
+	const countSum = (a) => {
+		return a.split('').reduce((acc, n) => acc + +n, 0);
+	}
+	return string
+	.split(' ')
+	.sort((a, b) => {
+		const difference = countSum(a) - countSum(b);
+		return difference === 0 ? (a > b ? 1 : -1) : difference;
+	})
+	.join(' ');
+}
+
+console.log('Weight for weight: ', orderWeight('56 65 74 100 99 68 86 180 90'), 'res must be: "100 180 90 56 65 74 68 86 99"');
+console.log('Weight for weight: ', orderWeight('2000 10003 1234000 44444444 9999 11 11 22 123'));
+console.log('Weight for weight: ', orderWeight('27 72 18 81'));
