@@ -1532,3 +1532,35 @@ console.log('first_non_repeating_letter: ', first_non_repeating_letter('stress')
 console.log('first_non_repeating_letter: ', first_non_repeating_letter('moonmen'));
 console.log('first_non_repeating_letter: ', first_non_repeating_letter('n5oqkn5oqk59yq59yq4d8f4d8f2qb62qb6t6mjft6mjfqzjvbqzjvb2w1ii2w1iiut4iut4iv05e5v05e5cx0hqcx0hq0jst70jst7g'));
 console.log('first_non_repeating_letter: ', first_non_repeating_letter('sTreSS'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Incrementing string
+//---------------------------------------------------------------------------------------------------------------------------
+
+// 1 way:
+// function incrementString (string) {
+// 	const matches = string.matchAll(/[0-9]/g);
+// 	let num = Array.from(matches, m => m[0]);
+// 	num[num.length - 1]++;
+// 	const matches2 = string.matchAll(/[0-9]/g);
+// 	let i = Array.from(matches2, m => m.index)[0];
+
+// 	return string.slice(0, i) + `${num.join('')}`;
+// }
+
+// 2 way: 
+function incrementString (string) {
+	let nums = string.split('').reduce((acc, l) => l.match(/[0-9]/g) ? acc + l : acc, '');
+	if (!nums.length) return string + 1;
+	const start = string.slice(0, string.indexOf(nums[0]));
+	const num = +nums + 1;
+	if (('' + num).length < nums.length) {
+		const zeros = '0'.repeat(nums.length - ('' + num).length);
+		return start + zeros + num;
+	} else {
+		return start + num;
+	}
+}
+
+console.log('Incrementing string: ', incrementString('foo0042'));
+console.log('Incrementing string: ', incrementString('foobar99'));
