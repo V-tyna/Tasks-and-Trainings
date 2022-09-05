@@ -1509,3 +1509,26 @@ function orderWeight(string) {
 console.log('Weight for weight: ', orderWeight('56 65 74 100 99 68 86 180 90'), 'res must be: "100 180 90 56 65 74 68 86 99"');
 console.log('Weight for weight: ', orderWeight('2000 10003 1234000 44444444 9999 11 11 22 123'));
 console.log('Weight for weight: ', orderWeight('27 72 18 81'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    First non repeating letter
+//---------------------------------------------------------------------------------------------------------------------------
+
+function first_non_repeating_letter(string) {
+	let str = string;
+	for (let i = 0; i <= string.length; i++) {
+		let el = str.slice(0, 1);
+		str = str.slice(1);
+		if(str.toLowerCase().indexOf(el.toLowerCase()) !== -1) {
+			str = str.split('').filter(l => l !== el).join('');
+			if (str.length === 1 || !str.length) return str;
+		} else {
+			return el;
+		}
+	} 
+}
+
+console.log('first_non_repeating_letter: ', first_non_repeating_letter('stress'));
+console.log('first_non_repeating_letter: ', first_non_repeating_letter('moonmen'));
+console.log('first_non_repeating_letter: ', first_non_repeating_letter('n5oqkn5oqk59yq59yq4d8f4d8f2qb62qb6t6mjft6mjfqzjvbqzjvb2w1ii2w1iiut4iut4iv05e5v05e5cx0hqcx0hq0jst70jst7g'));
+console.log('first_non_repeating_letter: ', first_non_repeating_letter('sTreSS'));
