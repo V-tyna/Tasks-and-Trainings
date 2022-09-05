@@ -1570,7 +1570,7 @@ console.log('Incrementing string: ', incrementString('foobar99'));
 //---------------------------------------------------------------------------------------------------------------------------
 
 function extractDomain(str) {
-	const i = str.indexOf('www') === -1 ? str.indexOf('://') + 3 : str.indexOf('www') + 4;
+	const i = str.indexOf('www') === -1 ? str.indexOf('://') === -1 ? 0 : str.indexOf('://') + 3 : str.indexOf('www') + 4;
 	str = str.slice(i);
 	return str.slice(0, str.indexOf('.'));
 }
@@ -1578,3 +1578,65 @@ function extractDomain(str) {
 console.log('Extract the domain name from a URL: ', extractDomain('http://github.com/carbonfive/raygun'));
 console.log('Extract the domain name from a URL: ', extractDomain('http://www.zombie-bites.com'));
 console.log('Extract the domain name from a URL: ', extractDomain('https://www.cnet.com'));
+console.log('Extract the domain name from a URL: ', extractDomain('something.com'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Human readable duration format
+//---------------------------------------------------------------------------------------------------------------------------
+
+function humanReadableDurationFormat(num) {
+	const arr = [];
+	const obj = {};
+	function checkExistence(prop) {
+		if (obj[prop] !== undefined) {
+			let string;
+			if (+obj[prop] > 1) {
+				string = obj[prop] + ' ' + prop;
+			}
+			if (+obj[prop] === 1) {
+				string = '1 ' + prop.slice(0, -1);
+			}
+			if (string) {
+				arr.push(string);
+			}
+		}
+	}
+	if (num < 1) return 'now';
+	if (num >= 31536000) {
+		obj.years = Math.trunc(num / 31536000);
+		checkExistence('years');
+		num = num - obj.years * 31536000;
+	}
+	
+	if (num >= 86400) {
+		obj.days =  Math.trunc(num / 86400);
+		checkExistence('days');
+		num = num - obj.days * 86400;
+	}
+	if (num >= 3600) {
+		obj.hours =  Math.trunc(num / 3600);
+		checkExistence('hours');
+		num = num - obj.hours * 3600;
+	}
+	if (num >= 60) {
+		obj.minutes =  Math.trunc(num / 60);
+		checkExistence('minutes');
+		num = num - obj.minutes * 60;
+	}
+	if (num < 60) {
+		obj.seconds = num;
+		checkExistence('seconds');
+	}
+	if (arr.length === 1) {
+		return arr[0];
+	}
+	if (arr.length >= 2) {
+		let str = arr.reduce((acc, w) => acc + w + ', ', '');
+		str = str.slice(0, -2);
+		str = str.slice(0, str.lastIndexOf(',')) + ' and' + str.slice(str.lastIndexOf(',') + 1);
+		return str;
+	}
+}
+
+console.log('Human readable duration format: ', humanReadableDurationFormat(3662));
+console.log('Human readable duration format: ', humanReadableDurationFormat(15731080));
