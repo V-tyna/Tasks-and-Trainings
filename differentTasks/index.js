@@ -1564,3 +1564,17 @@ function incrementString (string) {
 
 console.log('Incrementing string: ', incrementString('foo0042'));
 console.log('Incrementing string: ', incrementString('foobar99'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Extract the domain name from a URL
+//---------------------------------------------------------------------------------------------------------------------------
+
+function extractDomain(str) {
+	const i = str.indexOf('www') === -1 ? str.indexOf('://') + 3 : str.indexOf('www') + 4;
+	str = str.slice(i);
+	return str.slice(0, str.indexOf('.'));
+}
+
+console.log('Extract the domain name from a URL: ', extractDomain('http://github.com/carbonfive/raygun'));
+console.log('Extract the domain name from a URL: ', extractDomain('http://www.zombie-bites.com'));
+console.log('Extract the domain name from a URL: ', extractDomain('https://www.cnet.com'));
