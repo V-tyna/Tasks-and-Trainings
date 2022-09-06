@@ -1715,3 +1715,40 @@ console.log('Sudoku: ', validSolution([
   [2, 8, 7, 4, 1, 9, 6, 3, 5],
   [3, 0, 0, 4, 8, 1, 1, 7, 9]
 ]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Scramble
+//---------------------------------------------------------------------------------------------------------------------------
+
+// way 1:
+// function scramble(str1, str2) {
+// 	return str2.split('').every(l => {
+// 		if (str1.includes(l)) {
+// 			str1 = str1.slice(0, str1.indexOf(l)) + str1.slice(str1.indexOf(l) + 1);
+// 			return true;
+// 		}
+// 	})
+// }
+
+// way 2: 
+// function scramble(str1, str2) {
+// 	str1 = [...str1];
+// 	for (let l of str2) {
+// 		const i = str1.indexOf(l);
+// 		if(i === -1) {
+// 			return false;
+// 		} else {
+// 			str1.splice(i, 1);
+// 		}
+// 	}
+// 	return true;
+// }
+
+// way 3 'Optimized solution':
+function scramble(str1, str2) {
+	return str2.split('').every((l) => str2.split(l).length <= str1.split(l).length);
+}
+
+console.log('Scramble: ', scramble('rkqodlw', 'world'));
+console.log('Scramble: ', scramble('cedewaraaossoqqyt', 'codewars'));
+console.log('Scramble: ', scramble('katas', 'steak'));
