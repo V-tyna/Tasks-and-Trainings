@@ -1640,3 +1640,79 @@ function humanReadableDurationFormat(num) {
 
 console.log('Human readable duration format: ', humanReadableDurationFormat(3662));
 console.log('Human readable duration format: ', humanReadableDurationFormat(15731080));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Sudoku: valid solution
+//---------------------------------------------------------------------------------------------------------------------------
+
+function validSolution(arr) {
+	let res = [];
+	function rowsCheck(arrToCheck) {
+		return arrToCheck.every(a => [...a].sort().join('') === '123456789');
+	}
+
+ 	function columnsCheck() {
+		let [row, col] = [0, 0];
+		let arrCols= [];
+		while (col < 9) {
+			row = 0;
+			let temp = [];
+			while (row < 9) {
+				temp.push(arr[row][col]);
+				row++;
+			}
+			arrCols.push(temp);
+			temp = [];
+			col++;
+		}
+		return rowsCheck(arrCols);
+	}
+
+	function squaresCheck() {
+		let [row, col] = [0, 0];
+		let squares = [];
+		let clone = arr.map(a => [...a]);
+		let temp = [];
+		while (clone.length) {
+			row = 0;
+			while (row < 3) {
+			col = 0;
+				while (col < 3) {
+				temp.push(clone[row][col]);
+				col++;
+				}
+			clone[row].splice(0, 3);
+			row++;
+			}
+			clone = clone.filter(a => a.length > 0);
+			squares.push(temp);
+			temp = [];
+		}
+		return rowsCheck(squares);
+	}
+
+	return rowsCheck(arr) && columnsCheck() && squaresCheck();
+}
+
+console.log('Sudoku: ', validSolution([
+  [5, 3, 4, 6, 7, 8, 9, 1, 2],
+  [6, 7, 2, 1, 9, 5, 3, 4, 8],
+  [1, 9, 8, 3, 4, 2, 5, 6, 7],
+  [8, 5, 9, 7, 6, 1, 4, 2, 3],
+  [4, 2, 6, 8, 5, 3, 7, 9, 1],
+  [7, 1, 3, 9, 2, 4, 8, 5, 6],
+  [9, 6, 1, 5, 3, 7, 2, 8, 4],
+  [2, 8, 7, 4, 1, 9, 6, 3, 5],
+  [3, 4, 5, 2, 8, 6, 1, 7, 9]
+]));
+console.log('Sudoku: ', validSolution([
+  [5, 3, 4, 6, 7, 8, 9, 1, 2], 
+  [6, 7, 2, 1, 9, 0, 3, 4, 8],
+  [1, 0, 0, 3, 4, 2, 5, 6, 0],
+  [8, 5, 9, 7, 6, 1, 0, 2, 0],
+  [4, 2, 6, 8, 5, 3, 7, 9, 1],
+  [7, 1, 3, 9, 2, 4, 8, 5, 6],
+  [9, 0, 1, 5, 3, 7, 2, 1, 4],
+  [2, 8, 7, 4, 1, 9, 6, 3, 5],
+  [3, 0, 0, 4, 8, 1, 1, 7, 9]
+]));
