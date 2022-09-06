@@ -1646,7 +1646,6 @@ console.log('Human readable duration format: ', humanReadableDurationFormat(1573
 //---------------------------------------------------------------------------------------------------------------------------
 
 function validSolution(arr) {
-	let res = [];
 	function rowsCheck(arrToCheck) {
 		return arrToCheck.every(a => [...a].sort().join('') === '123456789');
 	}
