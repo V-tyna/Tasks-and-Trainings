@@ -1752,3 +1752,38 @@ function scramble(str1, str2) {
 console.log('Scramble: ', scramble('rkqodlw', 'world'));
 console.log('Scramble: ', scramble('cedewaraaossoqqyt', 'codewars'));
 console.log('Scramble: ', scramble('katas', 'steak'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Greed is Good
+//---------------------------------------------------------------------------------------------------------------------------
+
+function greedIsGood(dice) {
+	let score = 0;
+	const obj = dice.reduce((acc, n) => ({...acc, [n]: acc[n] + 1 || 1}), {});
+	Object.entries(obj).forEach(keyVal => {
+		if (keyVal[1] >= 3) {
+			if (+keyVal[0] === 1) {
+				score += +(keyVal[0] + '000');
+			} else {
+				score += +(keyVal[0] + '00');
+			}
+			if (+keyVal[0] === 1 && keyVal[1] > 3) {
+				score += (keyVal[1] - 3) * 100;
+			}
+			if (+keyVal[0] === 5 && keyVal[1] > 3) {
+				score += (keyVal[1] - 3) * 50;
+			}
+		}
+		if (+keyVal[0] === 1 && keyVal[1] < 3) {
+			score += keyVal[1] * 100;
+		}
+		if (+keyVal[0] === 5 && keyVal[1] < 3) {
+			score += keyVal[1] * 50;
+		}
+	});
+	return score;
+}
+
+console.log('Greed is Good: ', greedIsGood([5, 1, 3, 4, 1])); // 250
+console.log('Greed is Good: ', greedIsGood( [1, 1, 1, 3, 1] )); // 1100
+console.log('Greed is Good: ', greedIsGood([2, 4, 4, 5, 4])); // 450
