@@ -1787,3 +1787,24 @@ function greedIsGood(dice) {
 console.log('Greed is Good: ', greedIsGood([5, 1, 3, 4, 1])); // 250
 console.log('Greed is Good: ', greedIsGood( [1, 1, 1, 3, 1] )); // 1100
 console.log('Greed is Good: ', greedIsGood([2, 4, 4, 5, 4])); // 450
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Write Number in Expanded Form
+//---------------------------------------------------------------------------------------------------------------------------
+
+function expandedForm(num) {
+	let str = '' + num;
+	let count = str.length;
+	let res = '';
+	while(count > 0) {
+		count--;
+		if (str[0] !== '0'){
+			res += str[0] + '0'.repeat(count) + ' + ';
+		}
+		str = str.slice(1);
+	}
+	return res.slice(0, -3);
+}
+
+console.log(expandedForm(70405));
