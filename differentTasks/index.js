@@ -1808,3 +1808,39 @@ function expandedForm(num) {
 }
 
 console.log(expandedForm(70405));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Statistics for an Athletic Association
+//---------------------------------------------------------------------------------------------------------------------------
+
+function stat(strg) {
+	if (!strg) return '';
+  function madeTimeFormat(sec) {
+		const hh = sec >= 3600 ? Math.trunc(sec / 3600) < 10 ? '0' + Math.trunc(sec / 3600) : Math.trunc(sec / 3600) : '00';
+		const mm = sec % 3600 >= 60 ? Math.trunc(sec % 3600 / 60) < 10 ? '0' + Math.trunc(sec % 3600 / 60) : Math.trunc(sec % 3600 / 60) : '00';
+		const ss = sec % 3600 % 60 < 10 ? '0' + sec % 3600 % 60 :  '' + sec % 3600 % 60;
+
+    return hh + '|' + mm + '|' + ss;
+  }
+
+  const seconds  = strg.split(',').map((el) => {
+    const hms = el.trim().split('|');
+    const h = +hms[0] * 3600;
+    const m = +hms[1] * 60;
+    const s = +hms[2];
+    return h + m + s;
+  });
+
+  const range = madeTimeFormat(Math.max(...seconds) - Math.min(...seconds));
+	const average = madeTimeFormat(Math.trunc(seconds.reduce((prev, next) => prev + next, 0) / seconds.length));
+	seconds.sort((a, b) => a - b);
+	const  median = seconds.length % 2 === 0 ? 
+		madeTimeFormat(Math.trunc((seconds[Math.floor(seconds.length / 2) - 1] + seconds[Math.ceil(seconds.length / 2)]) / 2)) :
+		madeTimeFormat(seconds[Math.floor(seconds.length / 2)]);
+	
+	return 'Range: ' + range + ' Average: ' + average + ' Median: ' + median;
+}
+
+console.log('Statistic: ', stat('01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17')); // 'Range: 01|01|18 Average: 01|38|05 Median: 01|32|34')
+console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41')); // 'Range: 00|31|17 Average: 02|26|18 Median: 02|22|00'
+console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 2|17|17')); // 'Range: 00|31|17 Average: 02|27|10 Median: 02|24|57'
