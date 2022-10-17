@@ -1846,7 +1846,7 @@ console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 
 console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 2|17|17')); // 'Range: 00|31|17 Average: 02|27|10 Median: 02|24|57'
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                   Multiply All (Curring)
+//                                   Multiply All (Simple curring)
 //---------------------------------------------------------------------------------------------------------------------------
 
 // function multiplyAll(arr) {
@@ -1858,3 +1858,34 @@ console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 
 const multiplyAll = (arr) => (n) => arr.map(x => x * n);
 
 console.log('Curring multiple all: ', multiplyAll([1, 2, 3])(2)); // [2, 4, 6]
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                   Currying and Partial application
+//---------------------------------------------------------------------------------------------------------------------------
+
+const curry = (fn, ...args) => {
+	if (args.length >= fn.length) {
+		console.log('Enough args FIRST CALL:', args);
+		return fn.bind(this, ...args);
+	}
+	return function curried(...args2) {
+		if (args.length + args2.length >= fn.length) {
+			console.log('Enough args:', [...args, ...args2]);
+			return fn.apply(this, [...args, ...args2]);
+		} else {
+			return function(...args3) {
+				console.log('NOT enough args:', [...args2, ...args3]);
+				return curried.apply(this, [...args2, ...args3]);
+			}
+		}
+	}
+}
+
+function add(a, b, c, d, f) { return a+b+c+d+f; }
+const addTest1 = curry(add, 1, 2);
+const addTest2 = curry(add, 1);
+const addTest3 = curry(add, 1, 2, 3, 4, 5);
+
+console.log(add(1, 2, 3, 4, 5) === addTest1(3, 4, 5));
+console.log(add(1, 2, 3, 4, 5) === addTest2(2)(3, 4)(5));
+console.log(add(1, 2, 3, 4, 5) === addTest3());
