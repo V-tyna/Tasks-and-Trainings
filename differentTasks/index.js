@@ -1889,3 +1889,42 @@ const addTest3 = curry(add, 1, 2, 3, 4, 5);
 console.log(add(1, 2, 3, 4, 5) === addTest1(3, 4, 5));
 console.log(add(1, 2, 3, 4, 5) === addTest2(2)(3, 4)(5));
 console.log(add(1, 2, 3, 4, 5) === addTest3());
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Find all anagrams
+//---------------------------------------------------------------------------------------------------------------------------
+
+const wordsForAnagram = 'адрес карп кума мир мука парк рим крап среда стук рост сорт трос oo';
+
+// Way with Object
+const getAnagrams = (str) => {
+	const words = str.split(' ');
+	const sorted = (w) => w.split('').sort().join('');
+	const obj = {};
+	words.forEach(word => {
+		const anagram = sorted(word);
+		let arr = [];
+		arr.push(word);
+		obj[anagram] ?  obj[anagram].push(word) : obj[anagram] = arr;
+		arr = [];
+	});
+	return Object.values(obj).filter(arr => arr.length > 1);
+}
+
+// Way with Map
+const getAnagramsMap = (str) => {
+	const words = str.split(' ');
+	const anagrams = new Map();
+	words.forEach(word => {
+		const anagram = word.split('').sort().join('');
+		if (anagrams.has(anagram)) {
+			anagrams.get(anagram).push(word);
+		} else {
+			anagrams.set(anagram, []);
+			anagrams.get(anagram).push(word);
+		}
+	});
+	return [...anagrams.values()].filter(arr => arr.length > 1);
+}
+
+console.log('Find all anagrams: ', getAnagramsMap(wordsForAnagram)); // [['адрес', 'среда'], ['карп', 'парк'], ['кума', 'мука'], ['мир', 'рим'], ['рост', 'сорт', 'трос'] ]
