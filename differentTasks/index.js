@@ -1927,4 +1927,104 @@ const getAnagramsMap = (str) => {
 	return [...anagrams.values()].filter(arr => arr.length > 1);
 }
 
-console.log('Find all anagrams: ', getAnagramsMap(wordsForAnagram)); // [['адрес', 'среда'], ['карп', 'парк'], ['кума', 'мука'], ['мир', 'рим'], ['рост', 'сорт', 'трос'] ]
+console.log('Find all anagrams: ', getAnagramsMap(wordsForAnagram)); // [['адрес', 'среда'], ['карп', 'парк'], ['кума', 'мука'], ['мир', 'рим'], ['рост', 'сорт', 'трос']]
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Reverse strings and put them into object ad key-value pair
+//---------------------------------------------------------------------------------------------------------------------------
+
+// function fn(array) => object // принимает массив валидных строк и возвращает объект со значениями строк из массива 
+// в качестве свойств и развернутыми в обратном порядке значениями из массива в качестве значений
+// Example: fn([‘one’, ‘two’]) -> { one: ‘eno’, two: ‘owt’ }
+
+const reverseStringsInObject = (arr) => {
+return arr.reduce((acc, word) =>  ({...acc, [word]: word.split('').reverse().join('')}), {})}
+
+console.log('Reverse strings and put them into object ad key-value pair: ', reverseStringsInObject(['one', 'two']));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Pow (recursion)
+//---------------------------------------------------------------------------------------------------------------------------
+//function power(a, b) => number // возвращает a в степени b, рекурсия
+
+const power = (a, b) => {
+	const pow = a;
+	while(b > 1) {
+		b--;
+		a *= pow;
+	}
+	return a;
+}
+
+const powerRecursion = (a, b) => {
+		if (b <= 1) return a;
+		return a * powerRecursion(a, b - 1);
+}
+
+console.log('Pow without recursion: ', power(3, 3));
+console.log('Pow with recursion: ', powerRecursion(3, 3));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Function wrapper that restrict call function more than once
+//---------------------------------------------------------------------------------------------------------------------------
+//function once(otherFunction) => function // обертка предотвращающая повторный вызов функции-аргумента
+
+function callOnce(fn) {
+	let count = 0;
+	return function(...args) {
+		if(count >= 1) {
+			return 'Sorry, you cannot call this function twice.';
+		} else {
+			count++;
+			return fn.apply(this, args);
+		}
+	}
+}
+
+const testOnce = callOnce((a, b) => a + b);
+console.log('Call oncec 1: ', testOnce(2, 3));
+console.log('Call once 2: ', testOnce(5, 6));
+console.log('Call once 3: ', testOnce(7, 6));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    FizzBuzz
+//---------------------------------------------------------------------------------------------------------------------------
+
+const fizzBuzz = (num) => {
+	let countDown = 1;
+	while (countDown <= num) {
+		if(countDown % 3 === 0 && countDown % 5 === 0) {
+			console.log('fizzbuzz');
+		} else if (countDown % 3 === 0) {
+			console.log('fizz');
+		} else if (countDown % 5 === 0) {
+			console.log('buzz');
+		} else {
+			console.log(countDown);
+		}
+		countDown++;
+	}
+}
+
+console.log('FizzBuzz: ', fizzBuzz(15));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Find Losted Num
+//---------------------------------------------------------------------------------------------------------------------------
+// const findLostedNum = (arr) => {
+// 	const sum = arr.reduce((a, n) => a += n, 0);
+// 	let max = Math.max(...arr);
+// 	let sumShouldBe = 0;
+// 	while(max >=0) {
+// 		sumShouldBe += max;
+// 		max--;
+// 	}
+// 	return sumShouldBe - sum;
+// }
+
+const findLostedNum = (arr) => {
+	arr.sort((a, b) => a - b);
+	return arr.find((num, i) => num + 1 !== arr[i + 1]) + 1;
+}
+
+console.log('Find losted num: ', findLostedNum([13, 5, 14, 15, 8, 7, 2, 3, 9, 0, 16, 18, 19, 1, 4, 6, 10, 12, 11, 20]));
