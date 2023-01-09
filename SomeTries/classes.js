@@ -13,6 +13,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var User = /** @class */ (function () {
     function User(name, job) {
         this.name = name;
@@ -63,3 +69,50 @@ var car = new Audi();
 console.log('Car: ', car);
 car.logInfo('Info');
 console.log('Car year: ', car.getCarYear());
+// *************************** DECORATOR ****************************
+function decoratorLog(constructorFn) {
+    console.log('Decorator logs constructor of wrapped class: ', constructorFn);
+}
+function isLog(flag) {
+    return flag ? decoratorLog : null;
+}
+var Person = /** @class */ (function () {
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        console.log('New Person');
+    }
+    Person = __decorate([
+        isLog(true)
+        // @decoratorLog
+    ], Person);
+    return Person;
+}());
+function abilityToShow(constructorFn) {
+    constructorFn.prototype.showHtml = function () {
+        var div = document.createElement('div');
+        div.innerHTML = JSON.stringify(this) + '<p>Shows data in decorator.</p>' + '<hr>';
+        document.body.appendChild(div);
+    };
+}
+var Person2 = /** @class */ (function () {
+    function Person2(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        console.log('New Person 2');
+    }
+    Person2.prototype.showData = function () {
+        var div = document.createElement('div');
+        div.innerHTML = JSON.stringify(this) + '<p>Shows data inside class.</p>' + '<hr>';
+        document.body.appendChild(div);
+    };
+    Person2 = __decorate([
+        abilityToShow
+    ], Person2);
+    return Person2;
+}());
+var person2 = new Person2('John', 25, 'Backend');
+console.log('Person 2: ', person2);
+person2.showHtml();
+person2.showData();
