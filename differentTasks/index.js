@@ -2444,3 +2444,71 @@ console.log(
 		[1, 9, 5],
 	])
 );
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    383. Ransom Note
+//---------------------------------------------------------------------------------------------------------------------------
+
+const canConstruct = (ransomNote, magazine) => {
+	if (magazine.length < ransomNote.length) {
+		return false;
+	}
+	const obj = magazine
+		.split('')
+		.reduce((acc, l) => ({ ...acc, [l]: acc[l] + 1 || 1 }), {});
+	const note = ransomNote
+		.split('')
+		.reduce((acc, l) => ({ ...acc, [l]: acc[l] + 1 || 1 }), {});
+	for (let n in note) {
+		if (obj[n] === undefined || obj[n] < note[n]) {
+			return false;
+		}
+	}
+	return true;
+};
+
+const canConstructChar = (ransomNote, magazine) => {
+	for (const char of magazine) {
+		ransomNote = ransomNote.replace(char, '');
+	}
+
+	if (!ransomNote) {
+		return true;
+	}
+	return false;
+};
+
+console.log(
+	'Ransome note: ',
+	canConstructChar('bg', 'efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj')
+);
+console.log('Ransome note: ', canConstruct('a', 'b'));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    2704. To Be Or Not To Be
+//---------------------------------------------------------------------------------------------------------------------------
+
+const expect = (val) => {
+	return {
+		toBe: (val2) => {
+			if (val === val2) {
+				return true;
+			} else {
+				throw new Error('Not Equal');
+			}
+		},
+		notToBe: (val2) => {
+			if (val !== val2) {
+				return true;
+			} else {
+				throw new Error('Equal');
+			}
+		},
+	};
+};
+
+console.log('To Be Or Not To Be: ', expect('a').notToBe('b'));
+console.log('To Be Or Not To Be: ', expect(5).notToBe(null));
+console.log('To Be Or Not To Be: ', expect(5).toBe(5));
+// console.log('To Be Or Not To Be: ', expect(5).toBe(6)); throw Error - Not Equal
+// console.log('To Be Or Not To Be: ', expect(5).notToBe(5)); throw Error - Equal
