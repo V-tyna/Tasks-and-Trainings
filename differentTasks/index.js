@@ -2409,3 +2409,38 @@ const minimumOperationsSet = function (nums) {
 
 console.log('minimumOperations: ', minimumOperations([1, 5, 0, 3, 5]));
 console.log('minimumOperations: ', minimumOperationsSet([1, 5, 0, 3, 5, 6]));
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    1672. Richest Customer Wealth (Leetcode)
+//---------------------------------------------------------------------------------------------------------------------------
+
+const maximumWealth = (accounts) => {
+	const sums = accounts.map((customer) =>
+		customer.reduce((acc, curr) => (acc += curr), 0)
+	);
+	return Math.max(...sums);
+};
+
+console.log(
+	'Richest: ',
+	maximumWealth([
+		[1, 2, 3],
+		[3, 2, 1],
+	])
+);
+console.log(
+	'Richest: ',
+	maximumWealth([
+		[1, 5],
+		[7, 3],
+		[3, 5],
+	])
+);
+console.log(
+	'Richest: ',
+	maximumWealth([
+		[2, 8, 7],
+		[7, 1, 3],
+		[1, 9, 5],
+	])
+);
