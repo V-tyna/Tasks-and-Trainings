@@ -129,9 +129,7 @@ const findPersonArr = ['Kate', 'Sean', 'John', 'Dean'];
 // }
 
 function foundPerson(people) {
-	return (
-		people.find((p) => p === 'Don' || p === 'John' || p === 'Kent') || ''
-	);
+	return people.find((p) => p === 'Don' || p === 'John' || p === 'Kent') || '';
 }
 
 console.log('Find Person: ', foundPerson(findPersonArr));
@@ -438,9 +436,7 @@ const romanToInt = function (s) {
 	};
 	let num = 0;
 	for (let i = 0; i < s.length; i++) {
-		roman[s[i]] < roman[s[i + 1]]
-			? (num -= roman[s[i]])
-			: (num += roman[s[i]]);
+		roman[s[i]] < roman[s[i + 1]] ? (num -= roman[s[i]]) : (num += roman[s[i]]);
 	}
 	return num;
 };
@@ -511,7 +507,7 @@ const getMoneyAtATM = (amount) => {
 	for (let i = 0; i < banknotes.length; i++) {
 		while (amount - banknotes[i] >= 0) {
 			amount -= banknotes[i];
-			result[banknotes[i]] = (result[banknotes[i]] + 1) || 1;
+			result[banknotes[i]] = result[banknotes[i]] + 1 || 1;
 		}
 	}
 	return result;
@@ -590,11 +586,7 @@ function removeExclamations(s) {
 					quantityOfExcl = beforeWordExcl;
 				}
 
-				return (
-					'!'.repeat(quantityOfExcl) +
-					word +
-					'!'.repeat(quantityOfExcl)
-				);
+				return '!'.repeat(quantityOfExcl) + word + '!'.repeat(quantityOfExcl);
 			} else {
 				return w
 					.split('')
@@ -626,7 +618,7 @@ const dots = (w, h) => {
 	const columns = row.repeat(h) + layout1.repeat(w) + '+';
 
 	return columns;
-}
+};
 
 console.log(dots(3, 2));
 console.log(dots(1, 1));
@@ -637,24 +629,36 @@ console.log(dots(5, 5));
 //---------------------------------------------------------------------------------------------------------------------------
 
 function findMissingLetter(array) {
-  let alphabet = array[0].codePointAt(0) < 90 ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' : 'abcdefghijklmnopqrstuvwxyz';
+	let alphabet =
+		array[0].codePointAt(0) < 90
+			? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+			: 'abcdefghijklmnopqrstuvwxyz';
 	const first = alphabet.indexOf(array[0]);
 	const last = alphabet.indexOf(array[array.length - 1]);
 	const subStr = alphabet.substring(first, last).split('');
 
-	return subStr.find(l => array.join('').includes(l) === false);
+	return subStr.find((l) => array.join('').includes(l) === false);
 }
 
 //alternative :
 function findMissingLetterAlternative(array) {
-let i = array[0].charCodeAt();
-array.map(l => l.charCodeAt() === i ? i++ : i);
-return String.fromCharCode(i);
+	let i = array[0].charCodeAt();
+	array.map((l) => (l.charCodeAt() === i ? i++ : i));
+	return String.fromCharCode(i);
 }
 
-console.log('Find missing letter: ', findMissingLetter(['a', 'b', 'c', 'd', 'f']));
-console.log('Find missing letter: ', findMissingLetter(['O', 'Q', 'R', 'S', 'T']));
-console.log('Find missing letter alternative: ', findMissingLetterAlternative(['O', 'Q', 'R', 'S', 'T']));
+console.log(
+	'Find missing letter: ',
+	findMissingLetter(['a', 'b', 'c', 'd', 'f'])
+);
+console.log(
+	'Find missing letter: ',
+	findMissingLetter(['O', 'Q', 'R', 'S', 'T'])
+);
+console.log(
+	'Find missing letter alternative: ',
+	findMissingLetterAlternative(['O', 'Q', 'R', 'S', 'T'])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Snail/Spiral matrix
@@ -671,41 +675,56 @@ const snail = (h, w) => {
 	let i = 1;
 
 	const goRight = (row, column) => {
-		
-		while (column < w && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+		while (
+			column < w &&
+			matrix[row][column] !== undefined &&
+			matrix[row][column] === 0
+		) {
 			matrix[row][column] = i++;
 			column++;
 		}
 		currentRow = row + 1;
 		currentColumn = column - 1;
-	}
+	};
 
 	const goDown = (row, column) => {
-		while (row < h && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+		while (
+			row < h &&
+			matrix[row][column] !== undefined &&
+			matrix[row][column] === 0
+		) {
 			matrix[row][column] = i++;
 			row++;
 		}
 		currentRow = row - 1;
 		currentColumn = column - 1;
-	}
+	};
 
 	const goLeft = (row, column) => {
-		while (column >= 0 && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+		while (
+			column >= 0 &&
+			matrix[row][column] !== undefined &&
+			matrix[row][column] === 0
+		) {
 			matrix[row][column] = i++;
 			column--;
 		}
 		currentRow = row - 1;
 		currentColumn = column + 1;
-	}
+	};
 
 	const goUp = (row, column) => {
-		while (row >= 0 && matrix[row][column] !== undefined && matrix[row][column] === 0) {
+		while (
+			row >= 0 &&
+			matrix[row][column] !== undefined &&
+			matrix[row][column] === 0
+		) {
 			matrix[row][column] = i++;
 			row--;
 		}
 		currentRow = row + 1;
 		currentColumn = column + 1;
-	}
+	};
 
 	while (i <= h * w) {
 		goRight(currentRow, currentColumn);
@@ -715,22 +734,25 @@ const snail = (h, w) => {
 	}
 
 	return matrix;
-}
+};
 
-console.table(snail(3, 5)); 
-console.table(snail(4, 4)); 
-console.table(snail(5, 5)); 
+console.table(snail(3, 5));
+console.table(snail(4, 4));
+console.table(snail(5, 5));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Sum of digits/Digital root
 //---------------------------------------------------------------------------------------------------------------------------
 
 const digital_root = (n) => {
-  if(n < 10) return n;
+	if (n < 10) return n;
 
-	const num = n.toString().split('').reduce((acc, num) => acc + +num, 0);
+	const num = n
+		.toString()
+		.split('')
+		.reduce((acc, num) => acc + +num, 0);
 	return digital_root(num);
-}
+};
 
 console.log('Digital root: ', digital_root(9427));
 
@@ -740,37 +762,44 @@ console.log('Digital root: ', digital_root(9427));
 
 const decodeMorse = (str) => {
 	const MORSE_CODE = {
-    ".-":"A",
-    "-...":"B",
-    "-.-.":"C",
-    "-..":"D",
-    ".":"E",
-    "..-.":"F",
-    "--.":"G",
-    "....":"H",
-    "..":"I",
-    ".---":"J",
-    "-.-":"K",
-    ".-..":"L",
-    "--":"M",
-    "-.":"N",
-    "---":"O",
-    ".--.":"P",
-    "--.-":"Q",
-    ".-.":"R",
-    "...":"S",
-    "-":"T",
-    "..-":"U",
-    "...-":"V",
-    ".--":"W",
-    "-..-":"X",
-    "-.--":"Y",
-    "--..":"Z",
+		'.-': 'A',
+		'-...': 'B',
+		'-.-.': 'C',
+		'-..': 'D',
+		'.': 'E',
+		'..-.': 'F',
+		'--.': 'G',
+		'....': 'H',
+		'..': 'I',
+		'.---': 'J',
+		'-.-': 'K',
+		'.-..': 'L',
+		'--': 'M',
+		'-.': 'N',
+		'---': 'O',
+		'.--.': 'P',
+		'--.-': 'Q',
+		'.-.': 'R',
+		'...': 'S',
+		'-': 'T',
+		'..-': 'U',
+		'...-': 'V',
+		'.--': 'W',
+		'-..-': 'X',
+		'-.--': 'Y',
+		'--..': 'Z',
+	};
+	return str
+		.split(' ')
+		.map((w) => MORSE_CODE[w] || ' ')
+		.join('')
+		.replaceAll('  ', ' ');
 };
-return str.split(' ').map(w => MORSE_CODE[w] || ' ').join('').replaceAll('  ', ' '); 
-}
 
-console.log('Morse code: ', decodeMorse('.... . -.--   .--- ..- -.. .   .--- ..- -.. .')); 
+console.log(
+	'Morse code: ',
+	decodeMorse('.... . -.--   .--- ..- -.. .   .--- ..- -.. .')
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    To weird case
@@ -788,24 +817,24 @@ const toWeirdCase = (string) => {
 			}
 		}
 		return arr.join('');
-	}
-	
-	return arrWords.map(word => toUpperCase(word)).join(' ');
-}
+	};
 
-console.log('To weird case: ', toWeirdCase('Weird string case')); 
+	return arrWords.map((word) => toUpperCase(word)).join(' ');
+};
+
+console.log('To weird case: ', toWeirdCase('Weird string case'));
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Tribonacci sequence
 //---------------------------------------------------------------------------------------------------------------------------
 
-const tribonacci = (signature,n) => {
-	if(n <= 2) return signature.slice(0, n);
+const tribonacci = (signature, n) => {
+	if (n <= 2) return signature.slice(0, n);
 	for (let i = 2; i < n - 1; i++) {
 		signature.push(signature[i] + signature[i - 1] + signature[i - 2]);
 	}
 	return signature;
-	}
+};
 
 console.log('Tribonacci: ', tribonacci([1, 1, 1], 10));
 
@@ -814,14 +843,19 @@ console.log('Tribonacci: ', tribonacci([1, 1, 1], 10));
 //---------------------------------------------------------------------------------------------------------------------------
 
 const findOdd = (a) => {
-	return Object.entries(a.reduce((acc, num) => ({...acc, [num]: acc[num] + 1 || 1 }), {})).find((key) => {
+	return Object.entries(
+		a.reduce((acc, num) => ({ ...acc, [num]: acc[num] + 1 || 1 }), {})
+	).find((key) => {
 		if (key[1] % 2 !== 0) {
 			return key;
 		}
 	})[0];
- }
+};
 
- console.log('Find odd: ', findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]));
+console.log(
+	'Find odd: ',
+	findOdd([20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Factorial and cache(memoization)
@@ -830,13 +864,13 @@ const findOdd = (a) => {
 const factorial = (function memoFactorial() {
 	const cache = {};
 	const factorial = (n) => {
-	if(n < 2) return 1;
-	if(!(n in cache)) {
-		cache[n] = n * factorial(n - 1);
-	} 
-	return cache[n];
-}
-return factorial;
+		if (n < 2) return 1;
+		if (!(n in cache)) {
+			cache[n] = n * factorial(n - 1);
+		}
+		return cache[n];
+	};
+	return factorial;
 })();
 
 console.log('Factorial wrapped1: ', factorial(3));
@@ -849,35 +883,59 @@ console.log('Factorial wrapped2: ', factorial(10));
 
 const sortNamesByLengthAndAlphabet = (names) => {
 	const stack = [];
-	names.forEach(name => {
-		if(!stack[name.length]) {
+	names.forEach((name) => {
+		if (!stack[name.length]) {
 			stack[name.length] = [];
-		} 
+		}
 		stack[name.length].push(name);
 	});
-	return stack.filter(arr => arr.sort().length !== 0).flat();
-}
+	return stack.filter((arr) => arr.sort().length !== 0).flat();
+};
 
-console.log('Sort names by length and alphabet: ', sortNamesByLengthAndAlphabet(['Sally', 'Suzy', 'Frank', 'John', 'Jennifer', 'Scott']));
+console.log(
+	'Sort names by length and alphabet: ',
+	sortNamesByLengthAndAlphabet([
+		'Sally',
+		'Suzy',
+		'Frank',
+		'John',
+		'Jennifer',
+		'Scott',
+	])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                    Get most profit from stock quotes 
+//                                    Get most profit from stock quotes
 //---------------------------------------------------------------------------------------------------------------------------
 
 const getMostProfitFromStockQuotes = (quotes, sum = 0) => {
-	if(quotes.length < 2) return sum;
+	if (quotes.length < 2) return sum;
 	const highestNum = Math.max(...quotes);
 	const end = quotes.indexOf(highestNum);
-	sum += quotes.slice(0, end).reduce((acc, num) => acc += highestNum - num, 0);
+	sum += quotes
+		.slice(0, end)
+		.reduce((acc, num) => (acc += highestNum - num), 0);
 	const stack = quotes.slice(end + 1);
 
 	return getMostProfitFromStockQuotes(stack, sum);
-}
+};
 
-console.log('Get most profit from stock quotes 1: ', getMostProfitFromStockQuotes([31,312,3,35,33,3,44,123,126,2,4,1]));
-console.log('Get most profit from stock quotes 2: ', getMostProfitFromStockQuotes([ 6, 5, 4, 3, 2, 1 ]));
-console.log('Get most profit from stock quotes 3: ', getMostProfitFromStockQuotes([ 1, 6, 5, 10, 8, 7 ]));
-console.log('Get most profit from stock quotes 4: ', getMostProfitFromStockQuotes([ 1, 2, 10, 3, 2, 7, 3, 2 ]));
+console.log(
+	'Get most profit from stock quotes 1: ',
+	getMostProfitFromStockQuotes([31, 312, 3, 35, 33, 3, 44, 123, 126, 2, 4, 1])
+);
+console.log(
+	'Get most profit from stock quotes 2: ',
+	getMostProfitFromStockQuotes([6, 5, 4, 3, 2, 1])
+);
+console.log(
+	'Get most profit from stock quotes 3: ',
+	getMostProfitFromStockQuotes([1, 6, 5, 10, 8, 7])
+);
+console.log(
+	'Get most profit from stock quotes 4: ',
+	getMostProfitFromStockQuotes([1, 2, 10, 3, 2, 7, 3, 2])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Equal side of an array
@@ -885,20 +943,29 @@ console.log('Get most profit from stock quotes 4: ', getMostProfitFromStockQuote
 
 const equalSideOfAnArray = (arr) => {
 	let leftSum = 0;
-	let rightSum = arr.reduce((acc, num) => acc+= num, 0);
-  for (let i = 0; i < arr.length; i++) {
-    rightSum -= arr[i];
-    if (leftSum === rightSum) {
-      return i;
-    }
-    leftSum += arr[i];
-  }
-  return -1;
-}
+	let rightSum = arr.reduce((acc, num) => (acc += num), 0);
+	for (let i = 0; i < arr.length; i++) {
+		rightSum -= arr[i];
+		if (leftSum === rightSum) {
+			return i;
+		}
+		leftSum += arr[i];
+	}
+	return -1;
+};
 
-console.log('Find index of equal side of array: ', equalSideOfAnArray([1,2,3,4,3,2,1]));
-console.log('Find index of equal side of array: ', equalSideOfAnArray([1,100,50,-51,1,1]));
-console.log('Find index of equal side of array: ', equalSideOfAnArray([20,10,-80,10,10,15,35]));
+console.log(
+	'Find index of equal side of array: ',
+	equalSideOfAnArray([1, 2, 3, 4, 3, 2, 1])
+);
+console.log(
+	'Find index of equal side of array: ',
+	equalSideOfAnArray([1, 100, 50, -51, 1, 1])
+);
+console.log(
+	'Find index of equal side of array: ',
+	equalSideOfAnArray([20, 10, -80, 10, 10, 15, 35])
+);
 console.log('Find index of equal side of array: ', equalSideOfAnArray([8, 0]));
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -906,7 +973,7 @@ console.log('Find index of equal side of array: ', equalSideOfAnArray([8, 0]));
 //---------------------------------------------------------------------------------------------------------------------------
 
 const mergeTwoArrays = (list1, list2) => {
-    return list1.concat(list2).sort((a, b) => a - b);
+	return list1.concat(list2).sort((a, b) => a - b);
 };
 
 console.log('Merge two arrays: ', mergeTwoArrays([1, 2, 3], [1, 2, 3]));
@@ -922,18 +989,18 @@ const frogJumps = (a, pos = 0, jumps = 0, stack = {}) => {
 	jumps++;
 	stack[pos] = stack[pos] + 1 || 1;
 	return frogJumps(a, pos, jumps, stack);
-}
+};
 
 const frogJumps2 = (a) => {
 	let jumps = 0;
 	let i = 0;
-	while(a[i] !== undefined) {
+	while (a[i] !== undefined) {
 		jumps++;
 		i += a[i];
-		if(jumps > a.length) return -1;
+		if (jumps > a.length) return -1;
 	}
 	return jumps;
-}
+};
 
 console.log('Frog jumps: ', frogJumps([1, 2, 2, -1]));
 console.log('Frog jumps: ', frogJumps([1, 2, 1, 5]));
@@ -948,16 +1015,19 @@ console.log('Frog jumps: ', frogJumps2([1, 1, 1, -2, 1]));
 
 const twistedSum = (n) => {
 	let sum = 0;
-  while(n >= 0) {
-		if(n > 9) {
-			sum += n.toString().split('').reduce((acc, num) => acc + +num, 0);
+	while (n >= 0) {
+		if (n > 9) {
+			sum += n
+				.toString()
+				.split('')
+				.reduce((acc, num) => acc + +num, 0);
 		} else {
 			sum += n;
 		}
 		n--;
-		}
-  return sum;  
-}
+	}
+	return sum;
+};
 
 console.log('Twisted sum: ', twistedSum(9686));
 
@@ -972,68 +1042,72 @@ const oddMagicSquare = (n) => {
 	}
 	let row = 0;
 	let column = Math.floor(n / 2);
-	
+
 	let num = 1;
 	matrix[row][column] = num;
 
-	while(num < n * n) {
+	while (num < n * n) {
 		num++;
 		row--;
 		column++;
-		if (row < 0 && column >=n) {
+		if (row < 0 && column >= n) {
 			row += 2;
-			column--;	
-		}
-		else if (row < 0) {
+			column--;
+		} else if (row < 0) {
 			row = n - 1;
-		}
-		else if (column >= n) {
+		} else if (column >= n) {
 			column = 0;
-		}
-		else if (matrix[row][column] !== 0) {
+		} else if (matrix[row][column] !== 0) {
 			row += 2;
-			column--;	
+			column--;
 		}
 		matrix[row][column] = num;
 	}
-	
+
 	return matrix;
-}
+};
 
 console.table(oddMagicSquare(7));
 console.table(oddMagicSquare(5));
 
 //---------------------------------------------------------------------------------------------------------------------------
-//                                    Create Functions 
+//                                    Create Functions
 //---------------------------------------------------------------------------------------------------------------------------
 
 const createFunction = (n) => {
 	let i = 0;
 	return new Array(n).fill(() => i++);
-}
+};
 
 const callbacks = createFunction(5);
 
-console.log('Call 5 functions: ', callbacks[0](), callbacks[1](), callbacks[2](), callbacks[3](), callbacks[4]());
+console.log(
+	'Call 5 functions: ',
+	callbacks[0](),
+	callbacks[1](),
+	callbacks[2](),
+	callbacks[3](),
+	callbacks[4]()
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Using closures to share class state
 //---------------------------------------------------------------------------------------------------------------------------
 
 // Functional style
-const Cat1 = (function (){
+const Cat1 = (function () {
 	const cats = [];
 	function constructor(name, weight) {
-		if(!name || !weight) throw new Error('no params');
+		if (!name || !weight) throw new Error('no params');
 		this.name = name;
 		this.weight = weight;
 		// Object.defineProperty(this, 'weight', {get: () => weight, set: (value) => weight = value})
-		
+
 		cats.push(this);
 	}
-	
+
 	constructor.averageWeight = () => {
-		return cats.reduce((acc, cat) => (acc + cat.weight), 0)/ cats.length;
+		return cats.reduce((acc, cat) => acc + cat.weight, 0) / cats.length;
 	};
 
 	return constructor;
@@ -1044,14 +1118,16 @@ const Cat1 = (function (){
 class Cat {
 	static cats = [];
 	constructor(name, weight) {
-		if(!name || !weight) throw new Error('no params');
+		if (!name || !weight) throw new Error('no params');
 		this.name = name;
 		this.weight = weight;
 		Cat.cats.push(this);
 	}
-	
+
 	static averageWeight() {
-		return this.cats.reduce((acc, cat) => (acc + cat.weight), 0)/ this.cats.length;
+		return (
+			this.cats.reduce((acc, cat) => acc + cat.weight, 0) / this.cats.length
+		);
 	}
 }
 
@@ -1059,13 +1135,15 @@ fluffy = new Cat('fluffy', 15);
 fluffy.weight = 13;
 garfield = new Cat('garfield', 25);
 
-
 console.log(fluffy.weight, 15);
 console.log(fluffy instanceof Cat, true);
 console.log(fluffy.averageWeight, undefined);
 console.log(typeof Cat.averageWeight, 'function');
 console.log(Cat.averageWeight(), 20);
-console.log(Cat.cats, [{name: 'fluffy', weight: 13}, {name: 'garfield', weight: 25}]);
+console.log(Cat.cats, [
+	{ name: 'fluffy', weight: 13 },
+	{ name: 'garfield', weight: 25 },
+]);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Is Pangram
@@ -1084,11 +1162,19 @@ console.log(Cat.cats, [{name: 'fluffy', weight: 13}, {name: 'garfield', weight: 
 
 const isPangram = (string) => {
 	string = string.toLowerCase();
-  return 'abcdefghijklmnopqrstuvwxyz'.split('').every(letter => string.includes(letter));
-}
+	return 'abcdefghijklmnopqrstuvwxyz'
+		.split('')
+		.every((letter) => string.includes(letter));
+};
 
-console.log('Is a pangram:', isPangram('The quick brown fox jumps over the lazy dog.'));
-console.log('Is a pangram:', isPangram('Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game.'));
+console.log(
+	'Is a pangram:',
+	isPangram('The quick brown fox jumps over the lazy dog.')
+);
+console.log(
+	'Is a pangram:',
+	isPangram('Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game.')
+);
 console.log('Is a pangram:', isPangram('This in not a pangram.'));
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -1096,7 +1182,10 @@ console.log('Is a pangram:', isPangram('This in not a pangram.'));
 //---------------------------------------------------------------------------------------------------------------------------
 
 const deleteNth = (arr, n) => {
-  const obj = arr.reduce((acc, num) => ({...acc, [num]: acc[num] + 1 || 1}), {});
+	const obj = arr.reduce(
+		(acc, num) => ({ ...acc, [num]: acc[num] + 1 || 1 }),
+		{}
+	);
 	let reducer = 0;
 	for (let key in obj) {
 		if (obj[key] > n) {
@@ -1107,11 +1196,15 @@ const deleteNth = (arr, n) => {
 			}
 		}
 	}
-  return arr;
-}
+	return arr;
+};
 
-console.log('Delete n times', deleteNth([1,1,3,3,7,2,2,2,2], 3), [1, 1, 3, 3, 7, 2, 2, 2]);
-console.log('Delete n times', deleteNth([20,37,20,21], 1), [20,37,21]);
+console.log(
+	'Delete n times',
+	deleteNth([1, 1, 3, 3, 7, 2, 2, 2, 2], 3),
+	[1, 1, 3, 3, 7, 2, 2, 2]
+);
+console.log('Delete n times', deleteNth([20, 37, 20, 21], 1), [20, 37, 21]);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Snail Sort
@@ -1120,71 +1213,71 @@ console.log('Delete n times', deleteNth([20,37,20,21], 1), [20,37,21]);
 // First approach
 
 const snail2 = (array) => {
-	if(array.length < 2) return array[0];
-  let elements = array.reduce((acc, n) => acc += n.length, 0);
+	if (array.length < 2) return array[0];
+	let elements = array.reduce((acc, n) => (acc += n.length), 0);
 	const lengthInnerArr = array[0].length;
-  let currentRow = 0;
-  let currentCol = 0;
-  const res = [];
-  const moveRight = (row, col) => {
-    while(col < lengthInnerArr && array[row][col] !== 0) {
-      res.push(array[row][col]);
-      array[row][col] = 0;
-      col++;
-    }
-    currentRow++;
-    currentCol = col - 1;
-  }
-  const moveDown = (row, col) => {
-    while(row < lengthInnerArr && array[row][col] !== 0) {
-      res.push(array[row][col]);
-      array[row][col] = 0;
-      row++;
-    }
-    currentCol--;
-    currentRow = row - 1;
-  }
-  const moveLeft = (row, col) => {
-    while(col >= 0 && array[row][col] !== 0) {
-      res.push(array[row][col]);
-      array[row][col] = 0;
-      col--;
-    }
-    currentRow--;
-    currentCol = col + 1;
-  }
-  const moveUp = (row, col) => {
-    while(row >= 0 && array[row][col] !== 0) {
-      res.push(array[row][col]);
-      array[row][col] = 0;
-      row--;
-    }
-    currentRow = row + 1;
-    currentCol++;
-  }
-  while(elements) {
-    moveRight(currentRow, currentCol);
-    moveDown(currentRow, currentCol);
-    moveLeft(currentRow, currentCol);
-    moveUp(currentRow, currentCol);
-    elements--;
-  }
-  
-  return res;
-}
+	let currentRow = 0;
+	let currentCol = 0;
+	const res = [];
+	const moveRight = (row, col) => {
+		while (col < lengthInnerArr && array[row][col] !== 0) {
+			res.push(array[row][col]);
+			array[row][col] = 0;
+			col++;
+		}
+		currentRow++;
+		currentCol = col - 1;
+	};
+	const moveDown = (row, col) => {
+		while (row < lengthInnerArr && array[row][col] !== 0) {
+			res.push(array[row][col]);
+			array[row][col] = 0;
+			row++;
+		}
+		currentCol--;
+		currentRow = row - 1;
+	};
+	const moveLeft = (row, col) => {
+		while (col >= 0 && array[row][col] !== 0) {
+			res.push(array[row][col]);
+			array[row][col] = 0;
+			col--;
+		}
+		currentRow--;
+		currentCol = col + 1;
+	};
+	const moveUp = (row, col) => {
+		while (row >= 0 && array[row][col] !== 0) {
+			res.push(array[row][col]);
+			array[row][col] = 0;
+			row--;
+		}
+		currentRow = row + 1;
+		currentCol++;
+	};
+	while (elements) {
+		moveRight(currentRow, currentCol);
+		moveDown(currentRow, currentCol);
+		moveLeft(currentRow, currentCol);
+		moveUp(currentRow, currentCol);
+		elements--;
+	}
 
-// Second approach 
+	return res;
+};
+
+// Second approach
 
 const snail1 = (array) => {
 	let res = [];
-	
-	while(array.length) {
+
+	while (array.length) {
 		res = res.concat(array.shift());
 		for (let i = 0; i < array.length; i++) {
 			res.push(array[i].pop());
 		}
 		if (array[array.length - 1]) {
-		res.push(...array.pop().reverse());
+			res.push(...array.pop().reverse());
 		}
 		for (let i = array.length - 1; i >= 0; i--) {
 			res.push(array[i].shift());
@@ -1192,10 +1285,27 @@ const snail1 = (array) => {
 	}
 
 	return res;
-}
+};
 
-console.log('Snail 1: ', snail1([[1, 2, 3], [4, 5, 6], [7, 8, 9]]));
-console.log('Snail 1: ', snail1([[1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 7], [19, 32, 33, 34, 25, 8], [18, 31, 36, 35, 26, 9], [17, 30, 29, 28, 27, 10], [16, 15, 14, 13, 12, 11]]));
+console.log(
+	'Snail 1: ',
+	snail1([
+		[1, 2, 3],
+		[4, 5, 6],
+		[7, 8, 9],
+	])
+);
+console.log(
+	'Snail 1: ',
+	snail1([
+		[1, 2, 3, 4, 5, 6],
+		[20, 21, 22, 23, 24, 7],
+		[19, 32, 33, 34, 25, 8],
+		[18, 31, 36, 35, 26, 9],
+		[17, 30, 29, 28, 27, 10],
+		[16, 15, 14, 13, 12, 11],
+	])
+);
 console.log('Snail 1: ', snail1([[1], [1]]));
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -1204,36 +1314,36 @@ console.log('Snail 1: ', snail1([[1], [1]]));
 
 const rotateMatrixLikeAVortex = (arr) => {
 	const matrix = [];
-	let coord = Math.floor(arr.length/2);
-	
-	for(let i = 0; i < arr.length; i++) {
+	let coord = Math.floor(arr.length / 2);
+
+	for (let i = 0; i < arr.length; i++) {
 		matrix.push(new Array(arr.length));
 	}
-	
+
 	if (arr.length % 2 !== 0) {
 		matrix[coord][coord] = arr[coord][coord];
-	} 
-	
-	const rotate = (arr, firstCoord, lastCoord) => {
-		// first rotate
-		for(let i = firstCoord; i <= lastCoord; i++) {
-			matrix[lastCoord][i] = arr[i][firstCoord]; 
-		}
-		// second rotate
-		for(let i = firstCoord + 1; i <= lastCoord; i++) {
-			matrix[arr.length - 1 - i][lastCoord] = arr[lastCoord][i]; 
-		}
-		// third rotate
-		for(let i = lastCoord; i > firstCoord; i--) {
-			matrix[firstCoord][i - 1] = arr[i - 1][lastCoord]; 
-		}
-		// forth rotate
-		for(let i = lastCoord; i > firstCoord; i--) {
-			matrix[arr.length - 1 - i][firstCoord] = arr[firstCoord][i]; 
-		}
 	}
 
-	while(coord > 0) {
+	const rotate = (arr, firstCoord, lastCoord) => {
+		// first rotate
+		for (let i = firstCoord; i <= lastCoord; i++) {
+			matrix[lastCoord][i] = arr[i][firstCoord];
+		}
+		// second rotate
+		for (let i = firstCoord + 1; i <= lastCoord; i++) {
+			matrix[arr.length - 1 - i][lastCoord] = arr[lastCoord][i];
+		}
+		// third rotate
+		for (let i = lastCoord; i > firstCoord; i--) {
+			matrix[firstCoord][i - 1] = arr[i - 1][lastCoord];
+		}
+		// forth rotate
+		for (let i = lastCoord; i > firstCoord; i--) {
+			matrix[arr.length - 1 - i][firstCoord] = arr[firstCoord][i];
+		}
+	};
+
+	while (coord > 0) {
 		let arrToRotate = arr;
 		let countRotates = 0;
 		coord--;
@@ -1241,45 +1351,82 @@ const rotateMatrixLikeAVortex = (arr) => {
 
 		while (countRotates <= coord) {
 			if (countRotates >= 1) {
-				arrToRotate = matrix.map(el => [...el]);
-			} 
+				arrToRotate = matrix.map((el) => [...el]);
+			}
 			rotate(arrToRotate, firstCoord, lastCoord);
 			countRotates++;
 		}
 	}
 
 	return matrix;
-}
+};
 
-console.log('Rotate matrix like a vortex: ', rotateMatrixLikeAVortex([[1, 5, 3, 6, 1, 2], [1, 5, 8, 7, 4, 3], [1, 1, 2, 4, 3, 4], [1, 3, 1, 2, 2, 5], [1, 3, 1, 2, 2, 6], [1, 3, 1, 2, 2, 6]]));
-console.log('Rotate matrix like a vortex: ', rotateMatrixLikeAVortex([[1, 5, 3, 6, 1], [1, 5, 8, 7, 4], [1, 1, 2, 4, 3], [1, 3, 1, 2, 2], [1, 3, 1, 2, 2]]));
-console.log('Rotate: ', rotateMatrixLikeAVortex([ [ 5, 2, 5, 6, 4, 6, 1, 6, 1, 9, 8, 5, 1, 6, 7 ],
-  [ 8, 2, 7, 5, 2, 7, 9, 5, 4, 8, 8, 9, 8, 9, 1 ],
-  [ 6, 9, 5, 1, 1, 8, 7, 3, 9, 1, 5, 9, 5, 5, 3 ],
-  [ 6, 3, 9, 1, 1, 1, 5, 1, 1, 4, 9, 4, 1, 6, 5 ],
-  [ 2, 4, 4, 3, 5, 9, 2, 2, 6, 8, 3, 6, 3, 9, 9 ],
-  [ 9, 7, 4, 5, 9, 7, 6, 9, 5, 8, 6, 2, 1, 2, 9 ],
-  [ 1, 2, 8, 1, 2, 7, 5, 4, 5, 8, 7, 6, 6, 4, 9 ],
-  [ 5, 4, 3, 8, 8, 6, 8, 2, 5, 5, 1, 1, 2, 8, 7 ],
-  [ 6, 7, 1, 5, 9, 4, 8, 2, 7, 2, 2, 5, 4, 1, 1 ],
-  [ 4, 8, 3, 5, 4, 5, 9, 6, 2, 9, 4, 7, 6, 4, 2 ],
-  [ 4, 3, 6, 3, 1, 5, 9, 9, 9, 6, 4, 6, 3, 6, 1 ],
-  [ 3, 5, 6, 8, 1, 6, 6, 9, 3, 1, 9, 9, 3, 8, 5 ],
-  [ 2, 5, 5, 1, 8, 1, 5, 1, 4, 7, 5, 5, 5, 3, 8 ],
-  [ 4, 1, 3, 4, 4, 9, 4, 9, 2, 2, 6, 1, 4, 5, 5 ],
-  [ 9, 3, 8, 9, 3, 8, 4, 6, 1, 7, 7, 1, 1, 1, 6 ] ]));
+console.log(
+	'Rotate matrix like a vortex: ',
+	rotateMatrixLikeAVortex([
+		[1, 5, 3, 6, 1, 2],
+		[1, 5, 8, 7, 4, 3],
+		[1, 1, 2, 4, 3, 4],
+		[1, 3, 1, 2, 2, 5],
+		[1, 3, 1, 2, 2, 6],
+		[1, 3, 1, 2, 2, 6],
+	])
+);
+console.log(
+	'Rotate matrix like a vortex: ',
+	rotateMatrixLikeAVortex([
+		[1, 5, 3, 6, 1],
+		[1, 5, 8, 7, 4],
+		[1, 1, 2, 4, 3],
+		[1, 3, 1, 2, 2],
+		[1, 3, 1, 2, 2],
+	])
+);
+console.log(
+	'Rotate: ',
+	rotateMatrixLikeAVortex([
+		[5, 2, 5, 6, 4, 6, 1, 6, 1, 9, 8, 5, 1, 6, 7],
+		[8, 2, 7, 5, 2, 7, 9, 5, 4, 8, 8, 9, 8, 9, 1],
+		[6, 9, 5, 1, 1, 8, 7, 3, 9, 1, 5, 9, 5, 5, 3],
+		[6, 3, 9, 1, 1, 1, 5, 1, 1, 4, 9, 4, 1, 6, 5],
+		[2, 4, 4, 3, 5, 9, 2, 2, 6, 8, 3, 6, 3, 9, 9],
+		[9, 7, 4, 5, 9, 7, 6, 9, 5, 8, 6, 2, 1, 2, 9],
+		[1, 2, 8, 1, 2, 7, 5, 4, 5, 8, 7, 6, 6, 4, 9],
+		[5, 4, 3, 8, 8, 6, 8, 2, 5, 5, 1, 1, 2, 8, 7],
+		[6, 7, 1, 5, 9, 4, 8, 2, 7, 2, 2, 5, 4, 1, 1],
+		[4, 8, 3, 5, 4, 5, 9, 6, 2, 9, 4, 7, 6, 4, 2],
+		[4, 3, 6, 3, 1, 5, 9, 9, 9, 6, 4, 6, 3, 6, 1],
+		[3, 5, 6, 8, 1, 6, 6, 9, 3, 1, 9, 9, 3, 8, 5],
+		[2, 5, 5, 1, 8, 1, 5, 1, 4, 7, 5, 5, 5, 3, 8],
+		[4, 1, 3, 4, 4, 9, 4, 9, 2, 2, 6, 1, 4, 5, 5],
+		[9, 3, 8, 9, 3, 8, 4, 6, 1, 7, 7, 1, 1, 1, 6],
+	])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Return the total number of smiling faces in the array
 //---------------------------------------------------------------------------------------------------------------------------
 
 function countSmileys(arr) {
-  const valid = [':)', ';)', ':D', ';D', ':-D', ':~D', ';-D', ';~D', ':~)', ';~)', ':-)', ';-)'];
-  return arr.filter((str) => valid.includes(str)).length;
+	const valid = [
+		':)',
+		';)',
+		':D',
+		';D',
+		':-D',
+		':~D',
+		';-D',
+		';~D',
+		':~)',
+		';~)',
+		':-)',
+		';-)',
+	];
+	return arr.filter((str) => valid.includes(str)).length;
 }
 
-console.log('Count smiles:', countSmileys([':D',':~)',';~D',':)']));
-console.log('Count smiles:', countSmileys([':)',':(',':D',':O',':;']));
+console.log('Count smiles:', countSmileys([':D', ':~)', ';~D', ':)']));
+console.log('Count smiles:', countSmileys([':)', ':(', ':D', ':O', ':;']));
 console.log('Count smiles:', countSmileys([';]', ':[', ';*', ':$', ';-D']));
 console.log('Count smiles:', countSmileys([]));
 
@@ -1287,15 +1434,15 @@ console.log('Count smiles:', countSmileys([]));
 //                                    Split string into pairs
 //---------------------------------------------------------------------------------------------------------------------------
 
-function pairLetters(str){
-  const res = [];
+function pairLetters(str) {
+	const res = [];
 	let i = 0;
 	while (i < str.length) {
 		const second = str[i + 1] || '_';
 		res.push(str[i] + second);
 		i += 2;
 	}
-  return res;
+	return res;
 }
 
 console.log('Pair letters: ', pairLetters('aabbccddffg'));
@@ -1304,18 +1451,18 @@ console.log('Pair letters: ', pairLetters('aabbccddffg'));
 //                                    Highest Scoring Word
 //---------------------------------------------------------------------------------------------------------------------------
 
-function high(x){
-  let temp = 0;
+function high(x) {
+	let temp = 0;
 	const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-  const res = x.split(' ').reduce((acc, word) => {
-    for (let l of word) {
-      temp += alphabet.indexOf(l) + 1;  
-    }
-    acc = [...acc, [word, temp]]
-    temp = 0;
-    return acc;
-  }, [])
-  return res.sort((a, b) => b[1] - a[1])[0][0];
+	const res = x.split(' ').reduce((acc, word) => {
+		for (let l of word) {
+			temp += alphabet.indexOf(l) + 1;
+		}
+		acc = [...acc, [word, temp]];
+		temp = 0;
+		return acc;
+	}, []);
+	return res.sort((a, b) => b[1] - a[1])[0][0];
 }
 
 console.log('Highest word: ', high('man i need a taxi up to ubud'));
@@ -1328,74 +1475,127 @@ console.log('Highest word: ', high('aa b'));
 
 function longestConsec(strarr, k) {
 	const res = [];
-	if( k === 0 || k > strarr.length || k <= 0) return '';
+	if (k === 0 || k > strarr.length || k <= 0) return '';
 	if (k === 1) {
 		return strarr.sort((a, b) => b.length - a.length)[0];
 	}
- 	while (strarr.length > 0) {
-	 	let temp = '';
+	while (strarr.length > 0) {
+		let temp = '';
 		if (strarr.length < k) {
 			return res[0];
 		}
-	 for (let i = 0; i < k; i++) {
-		 temp += strarr[i];
-	 }
-	 if (!res[0]) {
-		res.push(temp)
-	 }
-	 if (res[0] && res[0].length < temp.length) {
-		res.pop();
-		res.push(temp);
-	 }
-	 strarr.shift();
- }
+		for (let i = 0; i < k; i++) {
+			temp += strarr[i];
+		}
+		if (!res[0]) {
+			res.push(temp);
+		}
+		if (res[0] && res[0].length < temp.length) {
+			res.pop();
+			res.push(temp);
+		}
+		strarr.shift();
+	}
 }
 
-console.log('longest consequence: ', longestConsec(["zone", "abigail", "theta", "form", "libe", "zas"], 2));
-console.log('longest consequence: ', longestConsec(["aa", "bb", "cc", "dd", "ee", "hh"], 6));
+console.log(
+	'longest consequence: ',
+	longestConsec(['zone', 'abigail', 'theta', 'form', 'libe', 'zas'], 2)
+);
+console.log(
+	'longest consequence: ',
+	longestConsec(['aa', 'bb', 'cc', 'dd', 'ee', 'hh'], 6)
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Moving Zeros To The End
 //---------------------------------------------------------------------------------------------------------------------------
 
-// First way: 
+// First way:
 
 function moveZeros(arr) {
-	const zeros= [];
-	arr.forEach(el => {
-	 if (el === 0) {
-		 zeros.push(0);
-	 } 
-	})
-	const res = arr.filter(el => el !== 0);
+	const zeros = [];
+	arr.forEach((el) => {
+		if (el === 0) {
+			zeros.push(0);
+		}
+	});
+	const res = arr.filter((el) => el !== 0);
 	return [...res, ...zeros];
- }
+}
 
- // Second way: 
+// Second way:
 
- function moveZeros2(arr) {
-	return [
-		...arr.filter(el => el !== 0),
-		...arr.filter(el => el === 0)
-	];
- }
+function moveZeros2(arr) {
+	return [...arr.filter((el) => el !== 0), ...arr.filter((el) => el === 0)];
+}
 
- console.log('Move zeros: ', moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));
- console.log('Move zeros: ', moveZeros([8, 6, '9', [], [], 0, '5', false, [], 3, [], 1, null, {}, false, [], '7', '2', {}, null, true, '5', {}, 8, 6, '6', 0]));
- console.log('Move zeros2: ', moveZeros2(['3', 0, 0, 0, '9', false, 6, null, 4, [], [], '2', {}, false, 5, 6]));
+console.log('Move zeros: ', moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));
+console.log(
+	'Move zeros: ',
+	moveZeros([
+		8,
+		6,
+		'9',
+		[],
+		[],
+		0,
+		'5',
+		false,
+		[],
+		3,
+		[],
+		1,
+		null,
+		{},
+		false,
+		[],
+		'7',
+		'2',
+		{},
+		null,
+		true,
+		'5',
+		{},
+		8,
+		6,
+		'6',
+		0,
+	])
+);
+console.log(
+	'Move zeros2: ',
+	moveZeros2([
+		'3',
+		0,
+		0,
+		0,
+		'9',
+		false,
+		6,
+		null,
+		4,
+		[],
+		[],
+		'2',
+		{},
+		false,
+		5,
+		6,
+	])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Human readable time
 //---------------------------------------------------------------------------------------------------------------------------
 
-function humanReadable (seconds) {
-	
+function humanReadable(seconds) {
 	let hh = '0' + Math.trunc(seconds / 3600);
-	seconds -= (hh * 3600);
-	
+	seconds -= hh * 3600;
+
 	let mm = '0' + Math.trunc(seconds / 60);
-	seconds -= (mm * 60);
-	
+	seconds -= mm * 60;
+
 	let ss = '0' + seconds;
 
 	return `${hh.slice(-2)}:${mm.slice(-2)}:${ss.slice(-2)}`;
@@ -1408,7 +1608,9 @@ console.log('Human readable time: ', humanReadable(3599));
 //---------------------------------------------------------------------------------------------------------------------------
 
 function anagrams(word, words) {
-	return words.filter(w => w.split('').sort().join() === word.split('').sort().join());
+	return words.filter(
+		(w) => w.split('').sort().join() === word.split('').sort().join()
+	);
 }
 
 console.log('Anagrams: ', anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));
@@ -1417,41 +1619,52 @@ console.log('Anagrams: ', anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));
 //                                    Directions Reduction
 //---------------------------------------------------------------------------------------------------------------------------
 
-function dirReduc(arr){
+function dirReduc(arr) {
 	const stack = [];
 	arr.map((dir) => {
-		if (stack[stack.length - 1] && 
-			stack[stack.length - 1] === 'NORTH' && dir === 'SOUTH' 
-			|| stack[stack.length - 1] === 'SOUTH' && dir === 'NORTH' 
-			|| stack[stack.length - 1] === 'WEST' && dir === 'EAST' 
-			|| stack[stack.length - 1] === 'EAST' && dir === 'WEST') {
+		if (
+			(stack[stack.length - 1] &&
+				stack[stack.length - 1] === 'NORTH' &&
+				dir === 'SOUTH') ||
+			(stack[stack.length - 1] === 'SOUTH' && dir === 'NORTH') ||
+			(stack[stack.length - 1] === 'WEST' && dir === 'EAST') ||
+			(stack[stack.length - 1] === 'EAST' && dir === 'WEST')
+		) {
 			stack.pop();
 		} else {
 			stack.push(dir);
 		}
-	})
+	});
 	return stack;
 }
 
-console.log('Directions Reduction: ', dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]));
+console.log(
+	'Directions Reduction: ',
+	dirReduc(['NORTH', 'SOUTH', 'SOUTH', 'EAST', 'WEST', 'NORTH', 'WEST'])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Caesar cipher
 //---------------------------------------------------------------------------------------------------------------------------
 
-function rot13(message){
-  return message.split('').map(l => {
-		const alphabet = 'abcdefghijklmnopqrstuvwxyz'.includes(l) ? 'abcdefghijklmnopqrstuvwxyz' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		let lIndex = alphabet.indexOf(l);
-		if(lIndex === -1) {
-			return l;
-		}
-		let newIndex = lIndex + 13;
-		if (newIndex >= 26) {
-			newIndex = 13 - (26 - lIndex);
-		}
-		return alphabet[newIndex];
-	}).join('');
+function rot13(message) {
+	return message
+		.split('')
+		.map((l) => {
+			const alphabet = 'abcdefghijklmnopqrstuvwxyz'.includes(l)
+				? 'abcdefghijklmnopqrstuvwxyz'
+				: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			let lIndex = alphabet.indexOf(l);
+			if (lIndex === -1) {
+				return l;
+			}
+			let newIndex = lIndex + 13;
+			if (newIndex >= 26) {
+				newIndex = 13 - (26 - lIndex);
+			}
+			return alphabet[newIndex];
+		})
+		.join('');
 }
 
 console.log('Caesar cipher: ', rot13('Ndjn | lsldl { jsjk} '));
@@ -1468,24 +1681,36 @@ function cakes(recipe, available) {
 			amount.push(Math.trunc(available[ingr] / recipe[ingr]));
 		}
 	}
-  return Math.min(...amount);
+	return Math.min(...amount);
 }
 
-console.log('Pete, the baker: ', cakes({flour: 500, sugar: 200, eggs: 1}, {flour: 1200, sugar: 1200, eggs: 5, milk: 200}));
+console.log(
+	'Pete, the baker: ',
+	cakes(
+		{ flour: 500, sugar: 200, eggs: 1 },
+		{ flour: 1200, sugar: 1200, eggs: 5, milk: 200 }
+	)
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    The Hashtag Generator
 //---------------------------------------------------------------------------------------------------------------------------
 
-function generateHashtag (str) {
+function generateHashtag(str) {
 	str = str.replace(/ +/g, ' ');
-  if (str === '' || str === ' ') return false;
-  const finalWord = `#${str.split(' ').map(w => w = w[0].toUpperCase() + w.slice(1)).join('')}`;
+	if (str === '' || str === ' ') return false;
+	const finalWord = `#${str
+		.split(' ')
+		.map((w) => (w = w[0].toUpperCase() + w.slice(1)))
+		.join('')}`;
 	return finalWord.length > 140 ? false : finalWord;
 }
 
 console.log('The Hashtag Generator: ', generateHashtag('Do We have A Hashtag'));
-console.log('The Hashtag Generator: ', generateHashtag('code' + ' '.repeat(140) + 'wars'));
+console.log(
+	'The Hashtag Generator: ',
+	generateHashtag('code' + ' '.repeat(140) + 'wars')
+);
 console.log('The Hashtag Generator: ', generateHashtag(' '.repeat(200)));
 console.log('The Hashtag Generator: ', generateHashtag(''));
 
@@ -1496,18 +1721,25 @@ console.log('The Hashtag Generator: ', generateHashtag(''));
 function orderWeight(string) {
 	const countSum = (a) => {
 		return a.split('').reduce((acc, n) => acc + +n, 0);
-	}
+	};
 	return string
-	.split(' ')
-	.sort((a, b) => {
-		const difference = countSum(a) - countSum(b);
-		return difference === 0 ? (a > b ? 1 : -1) : difference;
-	})
-	.join(' ');
+		.split(' ')
+		.sort((a, b) => {
+			const difference = countSum(a) - countSum(b);
+			return difference === 0 ? (a > b ? 1 : -1) : difference;
+		})
+		.join(' ');
 }
 
-console.log('Weight for weight: ', orderWeight('56 65 74 100 99 68 86 180 90'), 'res must be: "100 180 90 56 65 74 68 86 99"');
-console.log('Weight for weight: ', orderWeight('2000 10003 1234000 44444444 9999 11 11 22 123'));
+console.log(
+	'Weight for weight: ',
+	orderWeight('56 65 74 100 99 68 86 180 90'),
+	'res must be: "100 180 90 56 65 74 68 86 99"'
+);
+console.log(
+	'Weight for weight: ',
+	orderWeight('2000 10003 1234000 44444444 9999 11 11 22 123')
+);
 console.log('Weight for weight: ', orderWeight('27 72 18 81'));
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -1519,19 +1751,36 @@ function first_non_repeating_letter(string) {
 	for (let i = 0; i <= string.length; i++) {
 		let el = str.slice(0, 1);
 		str = str.slice(1);
-		if(str.toLowerCase().indexOf(el.toLowerCase()) !== -1) {
-			str = str.split('').filter(l => l !== el).join('');
+		if (str.toLowerCase().indexOf(el.toLowerCase()) !== -1) {
+			str = str
+				.split('')
+				.filter((l) => l !== el)
+				.join('');
 			if (str.length === 1 || !str.length) return str;
 		} else {
 			return el;
 		}
-	} 
+	}
 }
 
-console.log('first_non_repeating_letter: ', first_non_repeating_letter('stress'));
-console.log('first_non_repeating_letter: ', first_non_repeating_letter('moonmen'));
-console.log('first_non_repeating_letter: ', first_non_repeating_letter('n5oqkn5oqk59yq59yq4d8f4d8f2qb62qb6t6mjft6mjfqzjvbqzjvb2w1ii2w1iiut4iut4iv05e5v05e5cx0hqcx0hq0jst70jst7g'));
-console.log('first_non_repeating_letter: ', first_non_repeating_letter('sTreSS'));
+console.log(
+	'first_non_repeating_letter: ',
+	first_non_repeating_letter('stress')
+);
+console.log(
+	'first_non_repeating_letter: ',
+	first_non_repeating_letter('moonmen')
+);
+console.log(
+	'first_non_repeating_letter: ',
+	first_non_repeating_letter(
+		'n5oqkn5oqk59yq59yq4d8f4d8f2qb62qb6t6mjft6mjfqzjvbqzjvb2w1ii2w1iiut4iut4iv05e5v05e5cx0hqcx0hq0jst70jst7g'
+	)
+);
+console.log(
+	'first_non_repeating_letter: ',
+	first_non_repeating_letter('sTreSS')
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Incrementing string
@@ -1548,9 +1797,11 @@ console.log('first_non_repeating_letter: ', first_non_repeating_letter('sTreSS')
 // 	return string.slice(0, i) + `${num.join('')}`;
 // }
 
-// 2 way: 
-function incrementString (string) {
-	let nums = string.split('').reduce((acc, l) => l.match(/[0-9]/g) ? acc + l : acc, '');
+// 2 way:
+function incrementString(string) {
+	let nums = string
+		.split('')
+		.reduce((acc, l) => (l.match(/[0-9]/g) ? acc + l : acc), '');
 	if (!nums.length) return string + 1;
 	const start = string.slice(0, string.indexOf(nums[0]));
 	const num = +nums + 1;
@@ -1570,15 +1821,32 @@ console.log('Incrementing string: ', incrementString('foobar99'));
 //---------------------------------------------------------------------------------------------------------------------------
 
 function extractDomain(str) {
-	const i = str.indexOf('www') === -1 ? str.indexOf('://') === -1 ? 0 : str.indexOf('://') + 3 : str.indexOf('www') + 4;
+	const i =
+		str.indexOf('www') === -1
+			? str.indexOf('://') === -1
+				? 0
+				: str.indexOf('://') + 3
+			: str.indexOf('www') + 4;
 	str = str.slice(i);
 	return str.slice(0, str.indexOf('.'));
 }
 
-console.log('Extract the domain name from a URL: ', extractDomain('http://github.com/carbonfive/raygun'));
-console.log('Extract the domain name from a URL: ', extractDomain('http://www.zombie-bites.com'));
-console.log('Extract the domain name from a URL: ', extractDomain('https://www.cnet.com'));
-console.log('Extract the domain name from a URL: ', extractDomain('something.com'));
+console.log(
+	'Extract the domain name from a URL: ',
+	extractDomain('http://github.com/carbonfive/raygun')
+);
+console.log(
+	'Extract the domain name from a URL: ',
+	extractDomain('http://www.zombie-bites.com')
+);
+console.log(
+	'Extract the domain name from a URL: ',
+	extractDomain('https://www.cnet.com')
+);
+console.log(
+	'Extract the domain name from a URL: ',
+	extractDomain('something.com')
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Human readable duration format
@@ -1607,19 +1875,19 @@ function humanReadableDurationFormat(num) {
 		checkExistence('years');
 		num = num - obj.years * 31536000;
 	}
-	
+
 	if (num >= 86400) {
-		obj.days =  Math.trunc(num / 86400);
+		obj.days = Math.trunc(num / 86400);
 		checkExistence('days');
 		num = num - obj.days * 86400;
 	}
 	if (num >= 3600) {
-		obj.hours =  Math.trunc(num / 3600);
+		obj.hours = Math.trunc(num / 3600);
 		checkExistence('hours');
 		num = num - obj.hours * 3600;
 	}
 	if (num >= 60) {
-		obj.minutes =  Math.trunc(num / 60);
+		obj.minutes = Math.trunc(num / 60);
 		checkExistence('minutes');
 		num = num - obj.minutes * 60;
 	}
@@ -1633,13 +1901,22 @@ function humanReadableDurationFormat(num) {
 	if (arr.length >= 2) {
 		let str = arr.reduce((acc, w) => acc + w + ', ', '');
 		str = str.slice(0, -2);
-		str = str.slice(0, str.lastIndexOf(',')) + ' and' + str.slice(str.lastIndexOf(',') + 1);
+		str =
+			str.slice(0, str.lastIndexOf(',')) +
+			' and' +
+			str.slice(str.lastIndexOf(',') + 1);
 		return str;
 	}
 }
 
-console.log('Human readable duration format: ', humanReadableDurationFormat(3662));
-console.log('Human readable duration format: ', humanReadableDurationFormat(15731080));
+console.log(
+	'Human readable duration format: ',
+	humanReadableDurationFormat(3662)
+);
+console.log(
+	'Human readable duration format: ',
+	humanReadableDurationFormat(15731080)
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Sudoku: valid solution
@@ -1647,12 +1924,12 @@ console.log('Human readable duration format: ', humanReadableDurationFormat(1573
 
 function validSolution(arr) {
 	function rowsCheck(arrToCheck) {
-		return arrToCheck.every(a => [...a].sort().join('') === '123456789');
+		return arrToCheck.every((a) => [...a].sort().join('') === '123456789');
 	}
 
- 	function columnsCheck() {
+	function columnsCheck() {
 		let [row, col] = [0, 0];
-		let arrCols= [];
+		let arrCols = [];
 		while (col < 9) {
 			row = 0;
 			let temp = [];
@@ -1670,20 +1947,20 @@ function validSolution(arr) {
 	function squaresCheck() {
 		let [row, col] = [0, 0];
 		let squares = [];
-		let clone = arr.map(a => [...a]);
+		let clone = arr.map((a) => [...a]);
 		let temp = [];
 		while (clone.length) {
 			row = 0;
 			while (row < 3) {
-			col = 0;
+				col = 0;
 				while (col < 3) {
-				temp.push(clone[row][col]);
-				col++;
+					temp.push(clone[row][col]);
+					col++;
 				}
-			clone[row].splice(0, 3);
-			row++;
+				clone[row].splice(0, 3);
+				row++;
 			}
-			clone = clone.filter(a => a.length > 0);
+			clone = clone.filter((a) => a.length > 0);
 			squares.push(temp);
 			temp = [];
 		}
@@ -1693,28 +1970,34 @@ function validSolution(arr) {
 	return rowsCheck(arr) && columnsCheck() && squaresCheck();
 }
 
-console.log('Sudoku: ', validSolution([
-  [5, 3, 4, 6, 7, 8, 9, 1, 2],
-  [6, 7, 2, 1, 9, 5, 3, 4, 8],
-  [1, 9, 8, 3, 4, 2, 5, 6, 7],
-  [8, 5, 9, 7, 6, 1, 4, 2, 3],
-  [4, 2, 6, 8, 5, 3, 7, 9, 1],
-  [7, 1, 3, 9, 2, 4, 8, 5, 6],
-  [9, 6, 1, 5, 3, 7, 2, 8, 4],
-  [2, 8, 7, 4, 1, 9, 6, 3, 5],
-  [3, 4, 5, 2, 8, 6, 1, 7, 9]
-]));
-console.log('Sudoku: ', validSolution([
-  [5, 3, 4, 6, 7, 8, 9, 1, 2], 
-  [6, 7, 2, 1, 9, 0, 3, 4, 8],
-  [1, 0, 0, 3, 4, 2, 5, 6, 0],
-  [8, 5, 9, 7, 6, 1, 0, 2, 0],
-  [4, 2, 6, 8, 5, 3, 7, 9, 1],
-  [7, 1, 3, 9, 2, 4, 8, 5, 6],
-  [9, 0, 1, 5, 3, 7, 2, 1, 4],
-  [2, 8, 7, 4, 1, 9, 6, 3, 5],
-  [3, 0, 0, 4, 8, 1, 1, 7, 9]
-]));
+console.log(
+	'Sudoku: ',
+	validSolution([
+		[5, 3, 4, 6, 7, 8, 9, 1, 2],
+		[6, 7, 2, 1, 9, 5, 3, 4, 8],
+		[1, 9, 8, 3, 4, 2, 5, 6, 7],
+		[8, 5, 9, 7, 6, 1, 4, 2, 3],
+		[4, 2, 6, 8, 5, 3, 7, 9, 1],
+		[7, 1, 3, 9, 2, 4, 8, 5, 6],
+		[9, 6, 1, 5, 3, 7, 2, 8, 4],
+		[2, 8, 7, 4, 1, 9, 6, 3, 5],
+		[3, 4, 5, 2, 8, 6, 1, 7, 9],
+	])
+);
+console.log(
+	'Sudoku: ',
+	validSolution([
+		[5, 3, 4, 6, 7, 8, 9, 1, 2],
+		[6, 7, 2, 1, 9, 0, 3, 4, 8],
+		[1, 0, 0, 3, 4, 2, 5, 6, 0],
+		[8, 5, 9, 7, 6, 1, 0, 2, 0],
+		[4, 2, 6, 8, 5, 3, 7, 9, 1],
+		[7, 1, 3, 9, 2, 4, 8, 5, 6],
+		[9, 0, 1, 5, 3, 7, 2, 1, 4],
+		[2, 8, 7, 4, 1, 9, 6, 3, 5],
+		[3, 0, 0, 4, 8, 1, 1, 7, 9],
+	])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Scramble
@@ -1730,7 +2013,7 @@ console.log('Sudoku: ', validSolution([
 // 	})
 // }
 
-// way 2: 
+// way 2:
 // function scramble(str1, str2) {
 // 	str1 = [...str1];
 // 	for (let l of str2) {
@@ -1746,7 +2029,9 @@ console.log('Sudoku: ', validSolution([
 
 // way 3 'Optimized solution':
 function scramble(str1, str2) {
-	return str2.split('').every((l) => str2.split(l).length <= str1.split(l).length);
+	return str2
+		.split('')
+		.every((l) => str2.split(l).length <= str1.split(l).length);
 }
 
 console.log('Scramble: ', scramble('rkqodlw', 'world'));
@@ -1759,8 +2044,8 @@ console.log('Scramble: ', scramble('katas', 'steak'));
 
 function greedIsGood(dice) {
 	let score = 0;
-	const obj = dice.reduce((acc, n) => ({...acc, [n]: acc[n] + 1 || 1}), {});
-	Object.entries(obj).forEach(keyVal => {
+	const obj = dice.reduce((acc, n) => ({ ...acc, [n]: acc[n] + 1 || 1 }), {});
+	Object.entries(obj).forEach((keyVal) => {
 		if (keyVal[1] >= 3) {
 			if (+keyVal[0] === 1) {
 				score += +(keyVal[0] + '000');
@@ -1785,9 +2070,8 @@ function greedIsGood(dice) {
 }
 
 console.log('Greed is Good: ', greedIsGood([5, 1, 3, 4, 1])); // 250
-console.log('Greed is Good: ', greedIsGood( [1, 1, 1, 3, 1] )); // 1100
+console.log('Greed is Good: ', greedIsGood([1, 1, 1, 3, 1])); // 1100
 console.log('Greed is Good: ', greedIsGood([2, 4, 4, 5, 4])); // 450
-
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Write Number in Expanded Form
@@ -1797,9 +2081,9 @@ function expandedForm(num) {
 	let str = '' + num;
 	let count = str.length;
 	let res = '';
-	while(count > 0) {
+	while (count > 0) {
 		count--;
-		if (str[0] !== '0'){
+		if (str[0] !== '0') {
 			res += str[0] + '0'.repeat(count) + ' + ';
 		}
 		str = str.slice(1);
@@ -1815,35 +2099,66 @@ console.log(expandedForm(70405));
 
 function stat(strg) {
 	if (!strg) return '';
-  function madeTimeFormat(sec) {
-		const hh = sec >= 3600 ? Math.trunc(sec / 3600) < 10 ? '0' + Math.trunc(sec / 3600) : Math.trunc(sec / 3600) : '00';
-		const mm = sec % 3600 >= 60 ? Math.trunc(sec % 3600 / 60) < 10 ? '0' + Math.trunc(sec % 3600 / 60) : Math.trunc(sec % 3600 / 60) : '00';
-		const ss = sec % 3600 % 60 < 10 ? '0' + sec % 3600 % 60 :  '' + sec % 3600 % 60;
+	function madeTimeFormat(sec) {
+		const hh =
+			sec >= 3600
+				? Math.trunc(sec / 3600) < 10
+					? '0' + Math.trunc(sec / 3600)
+					: Math.trunc(sec / 3600)
+				: '00';
+		const mm =
+			sec % 3600 >= 60
+				? Math.trunc((sec % 3600) / 60) < 10
+					? '0' + Math.trunc((sec % 3600) / 60)
+					: Math.trunc((sec % 3600) / 60)
+				: '00';
+		const ss =
+			(sec % 3600) % 60 < 10
+				? '0' + ((sec % 3600) % 60)
+				: '' + ((sec % 3600) % 60);
 
-    return hh + '|' + mm + '|' + ss;
-  }
+		return hh + '|' + mm + '|' + ss;
+	}
 
-  const seconds  = strg.split(',').map((el) => {
-    const hms = el.trim().split('|');
-    const h = +hms[0] * 3600;
-    const m = +hms[1] * 60;
-    const s = +hms[2];
-    return h + m + s;
-  });
+	const seconds = strg.split(',').map((el) => {
+		const hms = el.trim().split('|');
+		const h = +hms[0] * 3600;
+		const m = +hms[1] * 60;
+		const s = +hms[2];
+		return h + m + s;
+	});
 
-  const range = madeTimeFormat(Math.max(...seconds) - Math.min(...seconds));
-	const average = madeTimeFormat(Math.trunc(seconds.reduce((prev, next) => prev + next, 0) / seconds.length));
+	const range = madeTimeFormat(Math.max(...seconds) - Math.min(...seconds));
+	const average = madeTimeFormat(
+		Math.trunc(seconds.reduce((prev, next) => prev + next, 0) / seconds.length)
+	);
 	seconds.sort((a, b) => a - b);
-	const  median = seconds.length % 2 === 0 ? 
-		madeTimeFormat(Math.trunc((seconds[Math.floor(seconds.length / 2) - 1] + seconds[Math.ceil(seconds.length / 2)]) / 2)) :
-		madeTimeFormat(seconds[Math.floor(seconds.length / 2)]);
-	
+	const median =
+		seconds.length % 2 === 0
+			? madeTimeFormat(
+					Math.trunc(
+						(seconds[Math.floor(seconds.length / 2) - 1] +
+							seconds[Math.ceil(seconds.length / 2)]) /
+							2
+					)
+			  )
+			: madeTimeFormat(seconds[Math.floor(seconds.length / 2)]);
+
 	return 'Range: ' + range + ' Average: ' + average + ' Median: ' + median;
 }
 
-console.log('Statistic: ', stat('01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17')); // 'Range: 01|01|18 Average: 01|38|05 Median: 01|32|34')
-console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41')); // 'Range: 00|31|17 Average: 02|26|18 Median: 02|22|00'
-console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 2|17|17')); // 'Range: 00|31|17 Average: 02|27|10 Median: 02|24|57'
+console.log(
+	'Statistic: ',
+	stat('01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17')
+); // 'Range: 01|01|18 Average: 01|38|05 Median: 01|32|34')
+console.log(
+	'Statistic: ',
+	stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41')
+); // 'Range: 00|31|17 Average: 02|26|18 Median: 02|22|00'
+console.log(
+	'Statistic: ',
+	stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 2|17|17')
+); // 'Range: 00|31|17 Average: 02|27|10 Median: 02|24|57'
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                   Multiply All (Simple curring)
@@ -1855,7 +2170,7 @@ console.log('Statistic: ', stat('02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 
 // 	}
 // }
 
-const multiplyAll = (arr) => (n) => arr.map(x => x * n);
+const multiplyAll = (arr) => (n) => arr.map((x) => x * n);
 
 console.log('Curring multiple all: ', multiplyAll([1, 2, 3])(2)); // [2, 4, 6]
 
@@ -1873,15 +2188,17 @@ const curry = (fn, ...args) => {
 			console.log('Enough args:', [...args, ...args2]);
 			return fn.apply(this, [...args, ...args2]);
 		} else {
-			return function(...args3) {
+			return function (...args3) {
 				console.log('NOT enough args:', [...args2, ...args3]);
 				return curried.apply(this, [...args2, ...args3]);
-			}
+			};
 		}
-	}
-}
+	};
+};
 
-function add(a, b, c, d, f) { return a+b+c+d+f; }
+function add(a, b, c, d, f) {
+	return a + b + c + d + f;
+}
 const addTest1 = curry(add, 1, 2);
 const addTest2 = curry(add, 1);
 const addTest3 = curry(add, 1, 2, 3, 4, 5);
@@ -1894,28 +2211,29 @@ console.log(add(1, 2, 3, 4, 5) === addTest3());
 //                                    Find all anagrams
 //---------------------------------------------------------------------------------------------------------------------------
 
-const wordsForAnagram = 'адрес карп кума мир мука парк рим крап среда стук рост сорт трос oo';
+const wordsForAnagram =
+	'адрес карп кума мир мука парк рим крап среда стук рост сорт трос oo';
 
 // Way with Object
 const getAnagrams = (str) => {
 	const words = str.split(' ');
 	const sorted = (w) => w.split('').sort().join('');
 	const obj = {};
-	words.forEach(word => {
+	words.forEach((word) => {
 		const anagram = sorted(word);
 		let arr = [];
 		arr.push(word);
-		obj[anagram] ?  obj[anagram].push(word) : obj[anagram] = arr;
+		obj[anagram] ? obj[anagram].push(word) : (obj[anagram] = arr);
 		arr = [];
 	});
-	return Object.values(obj).filter(arr => arr.length > 1);
-}
+	return Object.values(obj).filter((arr) => arr.length > 1);
+};
 
 // Way with Map
 const getAnagramsMap = (str) => {
 	const words = str.split(' ');
 	const anagrams = new Map();
-	words.forEach(word => {
+	words.forEach((word) => {
 		const anagram = word.split('').sort().join('');
 		if (anagrams.has(anagram)) {
 			anagrams.get(anagram).push(word);
@@ -1924,8 +2242,8 @@ const getAnagramsMap = (str) => {
 			anagrams.get(anagram).push(word);
 		}
 	});
-	return [...anagrams.values()].filter(arr => arr.length > 1);
-}
+	return [...anagrams.values()].filter((arr) => arr.length > 1);
+};
 
 console.log('Find all anagrams: ', getAnagramsMap(wordsForAnagram)); // [['адрес', 'среда'], ['карп', 'парк'], ['кума', 'мука'], ['мир', 'рим'], ['рост', 'сорт', 'трос']]
 
@@ -1933,14 +2251,21 @@ console.log('Find all anagrams: ', getAnagramsMap(wordsForAnagram)); // [['ад�
 //                                    Reverse strings and put them into object ad key-value pair
 //---------------------------------------------------------------------------------------------------------------------------
 
-// function fn(array) => object // принимает массив валидных строк и возвращает объект со значениями строк из массива 
+// function fn(array) => object // принимает массив валидных строк и возвращает объект со значениями строк из массива
 // в качестве свойств и развернутыми в обратном порядке значениями из массива в качестве значений
 // Example: fn([‘one’, ‘two’]) -> { one: ‘eno’, two: ‘owt’ }
 
 const reverseStringsInObject = (arr) => {
-return arr.reduce((acc, word) =>  ({...acc, [word]: word.split('').reverse().join('')}), {})}
+	return arr.reduce(
+		(acc, word) => ({ ...acc, [word]: word.split('').reverse().join('') }),
+		{}
+	);
+};
 
-console.log('Reverse strings and put them into object ad key-value pair: ', reverseStringsInObject(['one', 'two']));
+console.log(
+	'Reverse strings and put them into object ad key-value pair: ',
+	reverseStringsInObject(['one', 'two'])
+);
 
 //---------------------------------------------------------------------------------------------------------------------------
 //                                    Pow (recursion)
@@ -1949,17 +2274,17 @@ console.log('Reverse strings and put them into object ad key-value pair: ', reve
 
 const power = (a, b) => {
 	const pow = a;
-	while(b > 1) {
+	while (b > 1) {
 		b--;
 		a *= pow;
 	}
 	return a;
-}
+};
 
 const powerRecursion = (a, b) => {
-		if (b <= 1) return a;
-		return a * powerRecursion(a, b - 1);
-}
+	if (b <= 1) return a;
+	return a * powerRecursion(a, b - 1);
+};
 
 console.log('Pow without recursion: ', power(3, 3));
 console.log('Pow with recursion: ', powerRecursion(3, 3));
@@ -1971,14 +2296,14 @@ console.log('Pow with recursion: ', powerRecursion(3, 3));
 
 function callOnce(fn) {
 	let count = 0;
-	return function(...args) {
-		if(count >= 1) {
+	return function (...args) {
+		if (count >= 1) {
 			return 'Sorry, you cannot call this function twice.';
 		} else {
 			count++;
 			return fn.apply(this, args);
 		}
-	}
+	};
 }
 
 const testOnce = callOnce((a, b) => a + b);
@@ -1993,7 +2318,7 @@ console.log('Call once 3: ', testOnce(7, 6));
 const fizzBuzz = (num) => {
 	let countDown = 1;
 	while (countDown <= num) {
-		if(countDown % 3 === 0 && countDown % 5 === 0) {
+		if (countDown % 3 === 0 && countDown % 5 === 0) {
 			console.log('fizzbuzz');
 		} else if (countDown % 3 === 0) {
 			console.log('fizz');
@@ -2004,7 +2329,7 @@ const fizzBuzz = (num) => {
 		}
 		countDown++;
 	}
-}
+};
 
 console.log('FizzBuzz: ', fizzBuzz(15));
 
@@ -2025,6 +2350,62 @@ console.log('FizzBuzz: ', fizzBuzz(15));
 const findLostedNum = (arr) => {
 	arr.sort((a, b) => a - b);
 	return arr.find((num, i) => num + 1 !== arr[i + 1]) + 1;
-}
+};
 
-console.log('Find losted num: ', findLostedNum([13, 5, 14, 15, 8, 7, 2, 3, 9, 0, 16, 18, 19, 1, 4, 6, 10, 12, 11, 20]));
+console.log(
+	'Find losted num: ',
+	findLostedNum([
+		13, 5, 14, 15, 8, 7, 2, 3, 9, 0, 16, 18, 19, 1, 4, 6, 10, 12, 11, 20,
+	])
+);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    Duplicate I & Duplicate II (Leetcode)
+//---------------------------------------------------------------------------------------------------------------------------
+
+const containsDuplicate = function (nums) {
+	return nums.length !== new Set(nums).size;
+};
+
+console.log('Duplicate I: ', containsDuplicate([1, 2, 3, 1]));
+console.log('Duplicate I: ', containsDuplicate([1, 2, 3, 4]));
+
+const containsNearbyDuplicate = function (nums, k) {
+	const cash = {};
+	for (let i = 0; i < nums.length; i++) {
+		if (cash[nums[i]] !== undefined && i - cash[nums[i]] <= k) {
+			return true;
+		}
+		cash[nums[i]] = i;
+	}
+	return false;
+};
+
+console.log('Duplicate true: ', containsNearbyDuplicate([1, 2, 3, 1], 3));
+console.log('Duplicate true: ', containsNearbyDuplicate([1, 0, 1, 1], 1));
+console.log(
+	'Duplicate false: ',
+	containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2)
+);
+
+//---------------------------------------------------------------------------------------------------------------------------
+//                                    2357. Make Array Zero by Subtracting Equal Amounts (Leetcode)
+//---------------------------------------------------------------------------------------------------------------------------
+
+const minimumOperations = function (nums) {
+	let count = 0;
+
+	while (!nums.every((n) => n === 0)) {
+		const smallest = Math.min(...nums.filter((n) => n !== 0));
+		nums = nums.map((n) => (n !== 0 ? n - smallest : n));
+		count++;
+	}
+	return count;
+};
+
+const minimumOperationsSet = function (nums) {
+	return new Set(nums.filter((n) => n !== 0)).size;
+};
+
+console.log('minimumOperations: ', minimumOperations([1, 5, 0, 3, 5]));
+console.log('minimumOperations: ', minimumOperationsSet([1, 5, 0, 3, 5, 6]));
